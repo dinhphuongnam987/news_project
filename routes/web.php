@@ -13,8 +13,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-TEST;
-
 $prefixAdmin = config('zvn.url.prefix_admin');
 $prefixNews  = config('zvn.url.prefix_news');
 
