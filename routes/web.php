@@ -10,6 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+use Illuminate\Support\Facades\Route;
+
 $prefixAdmin = config('zvn.url.prefix_admin');
 $prefixNews  = config('zvn.url.prefix_news');
 
