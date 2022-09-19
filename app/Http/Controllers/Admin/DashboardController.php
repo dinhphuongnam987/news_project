@@ -2,20 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Http\Request;
 
-class DashboardController extends Controller
+class DashboardController extends AdminController
 {
-    private $pathViewController = 'admin.dashboard.';  // slider
-    private $controllerName     = 'dashboard';
-
     public function __construct()
     {
-        view()->share('controllerName', $this->controllerName);
+        $this->pathViewController = 'admin.dashboard.';
+        $this->controllerName     = 'dashboard';
+        parent::__construct();
     }
 
-    public function index()
+    public function index(Request $request)
     {
         return view($this->pathViewController .  'index', []);
     }

@@ -2,40 +2,20 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Http\Request;
 use App\Models\ArticleModel as MainModel;
 use App\Models\CategoryModel;
 use App\Http\Requests\ArticleRequest as MainRequest;
 
-class ArticleController extends Controller
+class ArticleController extends AdminController
 {
-    private $pathViewController = 'admin.pages.article.';  // slider
-    private $controllerName     = 'article';
-    private $params             = [];
-    private $model;
-
     public function __construct()
     {
+        $this->pathViewController = 'admin.pages.article.';
+        $this->controllerName     = 'article';
         $this->model = new MainModel();
-        $this->params["pagination"]["totalItemsPerPage"] = 5;
-        view()->share('controllerName', $this->controllerName);
-    }
-
-    public function index(Request $request)
-    {
-        $this->params['filter']['status'] = $request->input('filter_status', 'all');
-        $this->params['search']['field']  = $request->input('search_field', ''); // all id description
-        $this->params['search']['value']  = $request->input('search_value', '');
-
-        $items              = $this->model->listItems($this->params, ['task'  => 'admin-list-items']);
-        $itemsStatusCount   = $this->model->countItems($this->params, ['task' => 'admin-count-items-group-by-status']); // [ ['status', 'count']]
-
-        return view($this->pathViewController .  'index', [
-            'params'        => $this->params,
-            'items'         => $items,
-            'itemsStatusCount' =>  $itemsStatusCount
-        ]);
+        parent::__construct();
     }
 
     public function form(Request $request)
@@ -72,19 +52,6 @@ class ArticleController extends Controller
         }
     }
 
-    public function status(Request $request)
-    {
-        $params["currentStatus"]  = $request->status;
-        $params["id"]             = $request->id;
-        $this->model->saveItem($params, ['task' => 'change-status']);
-        $status = $request->status == 'active' ? 'inactive' : 'active';
-        $link = route($this->controllerName . '/status', ['status' => $status, 'id' => $request->id]);
-        return response()->json([
-            'statusObj' => config('zvn.template.status')[$status],
-            'link' => $link,
-        ]);
-    }
-
     public function type(Request $request)
     {
         $params["currentType"]    = $request->type;
@@ -93,12 +60,5 @@ class ArticleController extends Controller
         return response()->json([
             'status' => 'success'
         ]);
-    }
-
-    public function delete(Request $request)
-    {
-        $params["id"]             = $request->id;
-        $this->model->deleteItem($params, ['task' => 'delete-item']);
-        return redirect()->route($this->controllerName)->with('zvn_notify', 'Xóa phần tử thành công!');
     }
 }
