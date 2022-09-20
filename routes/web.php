@@ -154,7 +154,7 @@ Route::group(['prefix' => $prefixNews, 'namespace' => 'News'], function () {
     });
 });
 
-// ============================== 404 ERROR PAGE a ==============================
+// ============================== 404 ERROR PAGE ==============================
 Route::get('404', ['as' => '404', 'uses' => function () {
     return view('errors.404');
 }]);
