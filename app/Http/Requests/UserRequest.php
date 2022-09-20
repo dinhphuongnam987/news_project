@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Validator;
 
 class UserRequest extends FormRequest
 {
@@ -25,7 +26,10 @@ class UserRequest extends FormRequest
     public function rules()
     {
         $id = $this->id;
-        $task   = $this->task;
+        $task   = 'add';
+        if (isset($this->input()['btn-change-password'])) $task = 'change-password';
+        if (isset($this->input()['btn-change-level'])) $task = 'change-level';
+        if (isset($this->input()['btn-edit-info'])) $task = 'edit-info';
 
         $condAvatar   = '';
         $condUserName = '';
@@ -35,7 +39,6 @@ class UserRequest extends FormRequest
         $condStatus   = '';
         $condFullname = '';
 
-       
         switch ($task) {
             case 'add':
                 $condUserName   = "bail|required|between:5,100|unique:$this->table,username";
@@ -47,7 +50,7 @@ class UserRequest extends FormRequest
                 $condAvatar     = 'bail|required|image|max:500';
                 break;
             case 'edit-info':
-                $condUserName   = "bail|required|between:5,100|unique:$this->table,username,$id"; 
+                $condUserName   = "bail|required|between:5,100|unique:$this->table,username,$id";
                 $condFullname   = 'bail|required|min: 5';
                 $condAvatar     = 'bail|image|max:500';
                 $condStatus     = 'bail|in:active,inactive';
@@ -62,7 +65,6 @@ class UserRequest extends FormRequest
             default:
                 break;
         }
-        
 
         return [
             'username' => $condUserName,
