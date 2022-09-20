@@ -153,8 +153,3 @@ Route::group(['prefix' => $prefixNews, 'namespace' => 'News'], function () {
         Route::get('/get-coin',                             ['as' => "$controllerName/get-coin",                  'uses' => $controller . 'getCoin']);
     });
 });
-
-// ============================== 404 ERROR PAGE Test ==============================
-Route::get('404', ['as' => '404', 'uses' => function () {
-    return view('errors.404');
-}]);
