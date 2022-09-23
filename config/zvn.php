@@ -46,6 +46,15 @@ return [
             'vnexpress'   => ['name'=> 'VNExpress'],
             'tuoitre'     => ['name'=> 'Tuổi Trẻ'],
         ],
+        'type_menu' => [
+            'link'   => ['name'=> 'Link'],
+            'category_article'     => ['name'=> 'Danh mục bài viết'],
+        ],
+        'type_open_menu' => [
+            'current'   => ['name'=> 'Trang hiện tại', 'class' => '_self'],
+            'new_tab'     => ['name'=> 'Trang mới', 'class' => '_top'],
+            'new_window'     => ['name'=> 'Cửa sổ mới', 'class' => '_blank'],
+        ],
         'level'       => [
             'admin'      => ['name'=> 'Quản trị hệ thống'],
             'member'      => ['name'=> 'Người dùng bình thường'],
@@ -85,6 +94,7 @@ return [
             'article'   => ['edit', 'delete'],
             'rss'   => ['edit', 'delete'],
             'user'      => ['edit'],
+            'menu'      => ['edit', 'delete'],
         ]
     ]
     

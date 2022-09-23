@@ -19,6 +19,7 @@
             <li><a href="{{ route('user') }}"><i class="fa fa-user"></i> User</a></li>
             <li><a href="{{ route('category') }}"><i class="fa fa fa-building-o"></i> Category</a></li>
             <li><a href="{{ route('article') }}"><i class="fa fa-newspaper-o"></i> Article</a></li>
+            <li><a href="{{ route('menu') }}"><i class="fa fa-book"></i> Menu</a></li>
             <li><a href="{{ route('slider') }}"><i class="fa fa-sliders"></i> Silders</a></li>
             <li><a href="{{ route('rss') }}"><i class="fa fa-newspaper-o"></i> Rss</a></li>
         </ul>
