@@ -5,6 +5,8 @@ $(document).ready(function () {
     let $inputSearchField = $("input[name  = search_field]");
     let $inputSearchValue = $("input[name  = search_value]");
     let $selectChangeAttr = $("select[name = select_change_attr]");
+    let $inputLinkMenu    = $("#link");
+    let $selectTypeMenu   = $("#type_menu");
 
     $("a.select-field").click(function (e) {
         e.preventDefault();
@@ -128,4 +130,26 @@ $(document).ready(function () {
             },
         });
     });
+
+    let $inputLinkMenuValue = $inputLinkMenu.val();
+    $inputLinkMenu.on("input", function () {
+        $inputLinkMenuValue = $(this).val()
+    })
+    
+    if(($selectTypeMenu.val() !== 'link' && $selectTypeMenu.val() !== 'default')) {
+        $inputLinkMenu.val("#");
+        $inputLinkMenu.parents('.form-group').css('opacity', 0.6);
+    }
+
+    $selectTypeMenu.on("change", function () {
+        $typeMenuValue = $(this).val();
+        
+        if($typeMenuValue !== 'link' && $typeMenuValue !== 'default') {
+            $inputLinkMenu.val("#");
+            $inputLinkMenu.parents('.form-group').css('opacity', 0.6);
+        } else {
+            $inputLinkMenu.val($inputLinkMenuValue);
+            $inputLinkMenu.parents('.form-group').css('opacity', 1);
+        }
+    })
 });

@@ -16,10 +16,10 @@ class CreateMenuTable extends Migration
         Schema::create('menu', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100)->unique();
-            $table->string('link', 100)->unique();
+            $table->string('link', 100);
             $table->enum('status', ['active', 'inactive']);
             $table->integer('ordering');
-            $table->string('type_menu');
+            $table->enum('type_menu', ['link', 'category_article']);
             $table->enum('type_open', ['current', 'new_window', 'new_tab']);
             $table->string('created')->nullable();
             $table->string('created_by')->nullable();

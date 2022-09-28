@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Http\Request;
 use App\Models\MenuModel as MainModel;
-use App\Http\Requests\CategoryRequest as MainRequest;
+use App\Http\Requests\MenuRequest as MainRequest;
 
 class MenuController extends AdminController
 {

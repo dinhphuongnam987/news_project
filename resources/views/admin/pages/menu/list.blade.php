@@ -12,7 +12,6 @@
                     <th class="column-title">Link</th>
                     <th class="column-title">Ordering</th>
                     <th class="column-title">Trạng thái</th>
-                    <th class="column-title">Kiểu menu</th>
                     <th class="column-title">Kiểu mở menu</th>
                     <th class="column-title">Tạo mới</th>
                     <th class="column-title">Chỉnh sửa</th>
@@ -30,7 +29,6 @@
                             $name            = Hightlight::show($val['name'], $params['search'], 'name');
                             $link            = Hightlight::show($val['link'], $params['search'], 'link');
                             $status          = Template::showItemStatus($controllerName, $id, $val['status']);
-                            $typeMenu         = Template::showItemSelect($controllerName, $id, $val['type_menu'], 'type_menu');
                             $typeOpenMenu         = Template::showItemSelect($controllerName, $id, $val['type_open'], 'type_open_menu');
                             $createdHistory  = Template::showItemHistory($val['created_by'], $val['created']);
                             $modifiedHistory = Template::showItemHistory($val['modified_by'], $val['modified']);
@@ -43,7 +41,6 @@
                             <td >{{ $link }}</td>
                             <td >{{ $ordering }}</td>
                             <td>{!! $status !!}</td>
-                            <td>{!! $typeMenu !!}</td>
                             <td>{!! $typeOpenMenu !!}</td>
                             <td>{!! $createdHistory !!}</td>
                             <td>{!! $modifiedHistory !!}</td>

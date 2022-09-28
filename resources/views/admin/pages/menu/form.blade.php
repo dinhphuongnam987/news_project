@@ -10,7 +10,7 @@
     $typeMenuValue      = ['default' => 'Select type', 'link' => config('zvn.template.type_menu.link.name'), 'category_article' => config('zvn.template.type_menu.category_article.name')];
     $typeOpenMenuValue      = [
         'default' => 'Select type', 
-        'link' => config('zvn.template.type_open_menu.current.name'), 
+        'current' => config('zvn.template.type_open_menu.current.name'), 
         'new_tab' => config('zvn.template.type_open_menu.new_tab.name'),
         'new_window' => config('zvn.template.type_open_menu.new_window.name')
     ];
@@ -21,10 +21,6 @@
         [
             'label'   => Form::label('name', 'Name', $formLabelAttr),
             'element' => Form::text('name', @$item['name'], $formInputAttr )
-        ],
-        [
-            'label'   => Form::label('link', 'Link', $formLabelAttr),
-            'element' => Form::text('link', @$item['link'],  $formInputAttr )
         ],
         [
             'label'   => Form::label('ordering', 'Ordering', $formLabelAttr),
@@ -41,6 +37,10 @@
         [
             'label'   => Form::label('type_open', 'Type Open', $formLabelAttr),
             'element' => Form::select('type_open', $typeOpenMenuValue, @$item['type_open'], $formInputAttr)
+        ],
+        [
+            'label'   => Form::label('link', 'Link', $formLabelAttr),
+            'element' => Form::text('link', @$item['link'],  $formInputAttr )
         ],
         [
             'element' => $inputHiddenID . Form::submit('Save', ['class'=>'btn btn-success']),
