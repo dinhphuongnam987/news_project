@@ -1,26 +1,48 @@
 @php 
+    use App\Models\MenuModel;
     use App\Models\CategoryModel as CategoryModel;
     use App\Helpers\URL;
 
+    $menuModel = new MenuModel();
+    $itemsMenu  = $menuModel->listItems(null, ['task' => 'news-list-items']);
     $categoryModel = new CategoryModel();
     $itemsCategory = $categoryModel->listItems(null, ['task' => 'news-list-items']);
 
     $xhtmlMenu = '';
     $xhtmlMenuMobile = '';
+    $link = '';
 
-    if (count($itemsCategory) > 0) {
+    if (count($itemsMenu) > 0) {
         
         $xhtmlMenu = '<nav class="main_nav"><ul class="main_nav_list d-flex flex-row align-items-center justify-content-start">';
         $xhtmlMenuMobile = '<nav class="menu_nav"><ul class="menu_mm">';
-        $categoryIdCurrent = Route::input('category_id');
 
-        foreach ($itemsCategory as $item) {
-            
-            $link       =  URL::linkCategory($item['id'], $item['name']); 
-            $classActive = ($categoryIdCurrent == $item['id']) ? 'class="active"' : '';
+        foreach ($itemsMenu as $item) {
+            $link = $item['link'];
 
-            $xhtmlMenu .= sprintf('<li %s><a href="%s">%s</a></li>', $classActive, $link, $item['name']);
-            $xhtmlMenuMobile .= sprintf('<li class="menu_mm"><a href="%s">%s</a></li>', $link, $item['name']);
+            $xhtmlMenu .= sprintf('<li><a href="%s">%s</a>', $link, $item['name']);
+            $xhtmlMenuMobile .= sprintf('<li class="menu_mm"><a href="%s">%s</a>', $link, $item['name']);
+
+            if($item['type_menu']  == 'category_article') {
+                $xhtmlMenu .= '<i class="fa fa-caret-down btn-drop-down"></i>'; 
+                $xhtmlMenu .= '<div class="sub_menu">'; 
+                $xhtmlMenuMobile .= '<i class="fa fa-caret-down btn-drop-down"></i>'; 
+                $xhtmlMenuMobile .= '<div class="sub_menu">'; 
+
+                foreach ($itemsCategory as $category) {
+                    $categoryIdCurrent = Route::input('category_id');
+                    $link       =  URL::linkCategory($category['id'], $category['name']);
+                    $classActive = ($categoryIdCurrent == $category['id']) ? 'class="active"' : '';
+
+                    $xhtmlMenu .= sprintf('<a href="%s">%s</a>', $link, $category['name']);
+                    $xhtmlMenuMobile .= sprintf('<a href="%s">%s</a>', $link, $category['name']);
+                }   
+                $xhtmlMenu .= '</div>';
+                $xhtmlMenuMobile .= '</div>';
+            }
+
+            $xhtmlMenu .= '</li>';
+            $xhtmlMenuMobile .= '</li>';
         }
 
         $xhtmlMenu .= sprintf('<li><a href="%s">Tin tức tổng hợp</a></li>', route('rss/index'));

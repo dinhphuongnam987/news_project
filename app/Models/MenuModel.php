@@ -45,7 +45,7 @@ class MenuModel extends AdminModel
         }
 
         if ($options['task'] == 'news-list-items') {
-            $query = $this->select('id', 'name')
+            $query = $this->select('id', 'name', 'link', 'type_menu', 'type_open')
                 ->where('status', '=', 'active')
                 ->limit(8);
 

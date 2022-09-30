@@ -178,3 +178,24 @@ ul.main_nav_list li.active a{
 {
     color: #61e49b;
 }
+
+ul li .sub_menu {
+    display: none;
+    position: absolute;
+    background: #555;
+}
+
+ul li .sub_menu a{
+    display: block;
+    position: relative;
+    color: #ffffff !important;
+    padding: 10px;
+}
+
+ul li:hover .sub_menu {
+    display: block;
+}
+
+ul li .sub_menu a:hover{
+    background-color: #666;
+}
