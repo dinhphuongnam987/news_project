@@ -10,7 +10,8 @@
                     <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="{{ route('password') }}"><i class="fa fa-sign-out pull-right"></i>Change Password</a></li>
+                    <li><a href="{{ route('auth/logout') }}"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                 </ul>
             </li>
         </ul>

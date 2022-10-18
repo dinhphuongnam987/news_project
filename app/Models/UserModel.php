@@ -12,7 +12,7 @@ class UserModel extends AdminModel
         $this->table               = 'user';
         $this->folderUpload        = 'user';
         $this->fieldSearchAccepted = ['id', 'username', 'email', 'fullname'];
-        $this->crudNotAccepted     = ['_token', 'avatar_current', 'password_confirmation', 'task', 'btn-edit-info', 'btn-change-password', 'btn-change-level'];
+        $this->crudNotAccepted     = ['_token', 'avatar_current', 'password_confirmation', 'task', 'btn-edit-info', 'btn-change-password', 'btn-change-level', 'current_password'];
     }
 
     public function listItems($params = null, $options = null)
@@ -81,7 +81,7 @@ class UserModel extends AdminModel
         $result = null;
 
         if ($options['task'] == 'get-item') {
-            $result = self::select('id', 'username', 'email', 'status', 'fullname', 'level', 'avatar')->where('id', $params['id'])->first();
+            $result = self::select('id', 'username', 'email', 'status', 'fullname', 'level', 'avatar', 'password')->where('id', $params['id'])->first();
         }
 
         if ($options['task'] == 'get-avatar') {

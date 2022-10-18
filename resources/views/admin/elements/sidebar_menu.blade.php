@@ -22,6 +22,7 @@
             <li><a href="{{ route('menu') }}"><i class="fa fa-book"></i> Menu</a></li>
             <li><a href="{{ route('slider') }}"><i class="fa fa-sliders"></i> Silders</a></li>
             <li><a href="{{ route('rss') }}"><i class="fa fa-newspaper-o"></i> Rss</a></li>
+            <li><a href="{{ route('password') }}"><i class="fa fa-unlock-alt"></i> Change Password</a></li>
         </ul>
     </div>
 </div>
