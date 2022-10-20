@@ -20,7 +20,7 @@ class SliderModel extends AdminModel
         $result = null;
 
         if($options['task'] == "admin-list-items") {
-            $query = $this->select('id', 'name', 'description', 'status', 'link', 'thumb','created', 'created_by', 'modified', 'modified_by');
+            $query = $this->select('id', 'name', 'description', 'status', 'link', 'thumb','created', 'created_by', 'modified', 'modified_by', 'ordering');
                
             if ($params['filter']['status'] !== "all")  {
                 $query->where('status', '=', $params['filter']['status'] );
@@ -89,7 +89,7 @@ class SliderModel extends AdminModel
         $result = null;
         
         if($options['task'] == 'get-item') {
-            $result = self::select('id', 'name', 'description', 'status', 'link', 'thumb')->where('id', $params['id'])->first();
+            $result = self::select('id', 'name', 'description', 'status', 'link', 'thumb', 'ordering')->where('id', $params['id'])->first();
         }
 
         if($options['task'] == 'get-thumb') {

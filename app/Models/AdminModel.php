@@ -41,5 +41,10 @@ class AdminModel extends Model
         return array_diff_key($params, array_flip($this->crudNotAccepted));
     }
 
+    public function changeOrdering($params = null, $options = null) {
+        if($options['task'] == 'change-ordering') {
+            self::where('id', $params['id'])->update(['ordering' => $params['ordering']]);
+        }
+    }
 }
 

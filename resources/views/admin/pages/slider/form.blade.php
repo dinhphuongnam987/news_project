@@ -25,6 +25,9 @@
             'label'   => Form::label('link', 'Link', $formLabelAttr),
             'element' => Form::text('link', @$item['link'],  $formInputAttr )
         ],[
+            'label'   => Form::label('ordering', 'Ordering', $formLabelAttr),
+            'element' => Form::number('ordering', @$item['ordering'], ['min' => 1, 'max' => 100, 'class' => $formInputAttr['class']])
+        ],[
             'label'   => Form::label('thumb', 'Thumb', $formLabelAttr),
             'element' => Form::file('thumb', $formInputAttr ),
             'thumb'   => (!empty(@$item['id'])) ? Template::showItemThumb($controllerName, @$item['thumb'], @$item['name']) : null ,

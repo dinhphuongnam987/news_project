@@ -10,6 +10,7 @@
                     <th class="column-title">#</th>
                     <th class="column-title">Slider Info</th>
                     <th class="column-title">Trạng thái</th>
+                    <th class="column-title">Ordering</th>
                     <th class="column-title">Tạo mới</th>
                     <th class="column-title">Chỉnh sửa</th>
                     <th class="column-title">Hành động</th>
@@ -27,6 +28,7 @@
                             $link            = Hightlight::show($val['link'], $params['search'], 'link');
                             $thumb           = Template::showItemThumb($controllerName, $val['thumb'], $val['name']);;
                             $status          = Template::showItemStatus($controllerName, $id, $val['status']); ;
+                            $ordering        = Template::showOrdering($controllerName, $val['ordering'], $id); 
                             $createdHistory  = Template::showItemHistory($val['created_by'], $val['created']);
                             $modifiedHistory = Template::showItemHistory($val['modified_by'], $val['modified']);
                             $listBtnAction   = Template::showButtonAction($controllerName, $id);
@@ -41,6 +43,7 @@
                                 <p>{!! $thumb !!}</p>
                             </td>
                             <td>{!! $status !!}</td>
+                            <td>{!! $ordering !!}</td>
                             <td>{!! $createdHistory !!}</td>
                             <td>{!! $modifiedHistory !!}</td>
                             <td class="last">{!! $listBtnAction !!}</td>

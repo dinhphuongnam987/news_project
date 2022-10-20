@@ -25,7 +25,7 @@
                             $index           = $key + 1;
                             $class           = ($index % 2 == 0) ? "even" : "odd";
                             $id              = $val['id'];
-                            $ordering        = $val['ordering'];
+                            $ordering        = Template::showOrdering($controllerName, $val['ordering'], $id); 
                             $name            = Hightlight::show($val['name'], $params['search'], 'name');
                             $link            = Hightlight::show($val['link'], $params['search'], 'link');
                             $status          = Template::showItemStatus($controllerName, $id, $val['status']);
@@ -39,7 +39,7 @@
                             <td >{{ $index }}</td>
                             <td >{{ $name }}</td>
                             <td >{{ $link }}</td>
-                            <td >{{ $ordering }}</td>
+                            <td >{!! $ordering !!}</td>
                             <td>{!! $status !!}</td>
                             <td>{!! $typeOpenMenu !!}</td>
                             <td>{!! $createdHistory !!}</td>

@@ -66,4 +66,13 @@ class AdminController extends Controller
         $this->model->deleteItem($params, ['task' => 'delete-item']);
         return redirect()->route($this->controllerName)->with('zvn_notify', 'Xóa phần tử thành công!');
     }
+
+    public function ordering(Request $request) {
+        $params['id']       = $request->id;
+        $params['ordering'] = $request->ordering;
+        $this->model->changeOrdering($params, ['task' => 'change-ordering']);
+        return response()->json([
+            'ordering' => $request->ordering,
+        ]);
+    }
 }

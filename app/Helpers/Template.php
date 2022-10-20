@@ -156,4 +156,12 @@ class Template {
         $content = str_replace(['<p>', '</p>'], '', $content);
         return preg_replace('/\s+?(\S+)?$/', '', substr($content, 0, $length)) . $prefix;
     }
+
+    public static function showOrdering($controllerName, $ordering, $id = null) {
+        $link = route("$controllerName/ordering", ['ordering' => 'value_new', 'id' => $id]);
+        $xhtml = sprintf('<input type="number" class="ordering" name="ordering"
+        min="1" max="100" data-url="%s" value="%s">', $link, $ordering);
+
+        return $xhtml;
+    }
 }

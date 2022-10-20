@@ -37,6 +37,7 @@ Route::group(['prefix' => $prefixAdmin, 'namespace' => 'Admin', 'middleware' => 
         Route::get('change-status-{status}/{id}',       ['as' => $controllerName . '/status',      'uses' => $controller . 'status'])->where('id', '[0-9]+');
         Route::get('change-type-menu-{type_menu}/{id}',     ['as' => $controllerName . '/type_menu',     'uses' => $controller . 'typeMenu']);
         Route::get('change-type-open-menu-{type_open_menu}/{id}',     ['as' => $controllerName . '/type_open_menu',     'uses' => $controller . 'typeOpenMenu']);
+        Route::get('change-ordering-{ordering}/{id}',   ['as' => $controllerName . '/ordering',      'uses' => $controller . 'ordering'])->where('id', '[0-9]+');
     });
 
     // ============================== SLIDER ==============================
@@ -49,6 +50,7 @@ Route::group(['prefix' => $prefixAdmin, 'namespace' => 'Admin', 'middleware' => 
         Route::post('save',                         ['as' => $controllerName . '/save',        'uses' => $controller . 'save']);
         Route::get('delete/{id}',                   ['as' => $controllerName . '/delete',      'uses' => $controller . 'delete'])->where('id', '[0-9]+');
         Route::get('change-status-{status}/{id}',   ['as' => $controllerName . '/status',      'uses' => $controller . 'status'])->where('id', '[0-9]+');
+        Route::get('change-ordering-{ordering}/{id}',   ['as' => $controllerName . '/ordering',      'uses' => $controller . 'ordering'])->where('id', '[0-9]+');
     });
 
     // ============================== CATEGORY ==============================
@@ -103,6 +105,7 @@ Route::group(['prefix' => $prefixAdmin, 'namespace' => 'Admin', 'middleware' => 
         Route::post('save',                         ['as' => $controllerName . '/save',        'uses' => $controller . 'save']);
         Route::get('delete/{id}',                   ['as' => $controllerName . '/delete',      'uses' => $controller . 'delete'])->where('id', '[0-9]+');
         Route::get('change-status-{status}/{id}',   ['as' => $controllerName . '/status',      'uses' => $controller . 'status'])->where('id', '[0-9]+');
+        Route::get('change-ordering-{ordering}/{id}',   ['as' => $controllerName . '/ordering',      'uses' => $controller . 'ordering'])->where('id', '[0-9]+');
     });
 
     // ============================== CHANGE PASSWORD ==============================

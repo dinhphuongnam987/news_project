@@ -5,8 +5,9 @@ $(document).ready(function () {
     let $inputSearchField = $("input[name  = search_field]");
     let $inputSearchValue = $("input[name  = search_value]");
     let $selectChangeAttr = $("select[name = select_change_attr]");
-    let $inputLinkMenu    = $("#link");
+    let $inputLinkMenu    = $("#link_menu");
     let $selectTypeMenu   = $("#type_menu");
+    let $selectChangeOrdering = $(".ordering");
 
     $("a.select-field").click(function (e) {
         e.preventDefault();
@@ -151,5 +152,23 @@ $(document).ready(function () {
             $inputLinkMenu.val($inputLinkMenuValue);
             $inputLinkMenu.parents('.form-group').css('opacity', 1);
         }
+    })
+
+    $selectChangeOrdering.on('change', function() {
+        let element = $(this)
+        let url = $(this).attr("data-url");
+        let selectValue = $(this).val();
+        url = url.replace('value_new', selectValue);
+        $.ajax({
+            type: "GET",
+            url: url,
+            dataType: "json",
+            success: function (response) {
+                element.notify("Cập nhật thành công", {
+                    position: "top center",
+                    className: "success",
+                });
+            },
+        });
     })
 });
