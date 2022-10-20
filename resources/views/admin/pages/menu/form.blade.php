@@ -40,7 +40,7 @@
         ],
         [
             'label'   => Form::label('link', 'Link', $formLabelAttr),
-            'element' => Form::text('link', @$item['link'],  $formInputAttr )
+            'element' => Form::text('link', @$item['link'],  ['id' => 'link_menu', 'class' => $formInputAttr['class']])
         ],
         [
             'element' => $inputHiddenID . Form::submit('Save', ['class'=>'btn btn-success']),
