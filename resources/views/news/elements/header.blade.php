@@ -19,8 +19,9 @@
 
         foreach ($itemsMenu as $item) {
             $link = $item['link'];
+            $typeOpen = config('zvn.template.type_open_menu')[$item['type_open']]['class'];
 
-            $xhtmlMenu .= sprintf('<li><a href="%s">%s</a>', $link, $item['name']);
+            $xhtmlMenu .= sprintf('<li><a href="%s" target="%s">%s</a>', $link, $typeOpen, $item['name']);
             $xhtmlMenuMobile .= sprintf('<li class="menu_mm"><a href="%s">%s</a>', $link, $item['name']);
 
             if($item['type_menu']  == 'category_article') {
