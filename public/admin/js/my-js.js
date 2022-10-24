@@ -112,6 +112,7 @@ $(document).ready(function () {
                         },
                     });
                 })
+                break;
             case 'click':
                 elementSelector.on("click", function () {
                     let url = $(this).data("url");
@@ -136,6 +137,7 @@ $(document).ready(function () {
                         },
                     });
                 });
+                break; 
         }
 
     }
