@@ -70,68 +70,6 @@ $(document).ready(function () {
         if (!confirm("Bạn có chắc muốn xóa phần tử?")) return false;
     });
 
-    $(".status-ajax").on("click", function () {
-        let url = $(this).data("url");
-        let btn = $(this);
-        let currentClass = btn.data("class");
-        $.ajax({
-            type: "GET",
-            url: url,
-            dataType: "json",
-            success: function (response) {
-                btn.removeClass(currentClass);
-                btn.addClass(response.statusObj.class);
-                btn.html(response.statusObj.name);
-                btn.data("url", response.link);
-                btn.data("class", response.statusObj.class);
-                btn.notify("Cập nhật thành công", {
-                    position: "top center",
-                    className: "success",
-                });
-            },
-        });
-    });
-
-    $(".is-home-ajax").on("click", function () {
-        let url = $(this).data("url");
-        let btn = $(this);
-        let currentClass = btn.data("class");
-        $.ajax({
-            type: "GET",
-            url: url,
-            dataType: "json",
-            success: function (response) {
-                btn.removeClass(currentClass);
-                btn.addClass(response.isHomeObj.class);
-                btn.html(response.isHomeObj.name);
-                btn.data("url", response.link);
-                btn.data("class", response.isHomeObj.class);
-                btn.notify("Cập nhật thành công", {
-                    position: "top center",
-                    className: "success",
-                });
-            },
-        });
-    });
-
-    $selectChangeAttr.on("change", function () {
-        let ele = $(this);
-        let selectValue = $(this).val();
-        let url = $(this).data("url");
-        url = url.replace("value_new", selectValue);
-        $.ajax({
-            type: "GET",
-            url: url,
-            dataType: "json",
-            success: function (response) {
-                ele.notify("Cập nhật thành công", {
-                    position: "top center",
-                    className: "success",
-                });
-            },
-        });
-    });
-
     let $inputLinkMenuValue = $inputLinkMenu.val();
     $inputLinkMenu.on("input", function () {
         $inputLinkMenuValue = $(this).val()
@@ -154,21 +92,56 @@ $(document).ready(function () {
         }
     })
 
-    $selectChangeOrdering.on('change', function() {
-        let element = $(this)
-        let url = $(this).attr("data-url");
-        let selectValue = $(this).val();
-        url = url.replace('value_new', selectValue);
-        $.ajax({
-            type: "GET",
-            url: url,
-            dataType: "json",
-            success: function (response) {
-                element.notify("Cập nhật thành công", {
-                    position: "top center",
-                    className: "success",
+    function changeStateAdmin(elementSelector, event) {
+        switch (event) {
+            case 'change':
+                elementSelector.on('change', function() {
+                    let ele = $(this)
+                    let url = $(this).attr("data-url");
+                    let selectValue = $(this).val();
+                    url = url.replace('value_new', selectValue);
+                    $.ajax({
+                        type: "GET",
+                        url: url,
+                        dataType: "json",
+                        success: function (response) {
+                            ele.notify("Cập nhật thành công", {
+                                position: "top center",
+                                className: "success",
+                            });
+                        },
+                    });
+                })
+            case 'click':
+                elementSelector.on("click", function () {
+                    let url = $(this).data("url");
+                    let btn = $(this);
+                    let currentClass = btn.data("class");
+                    $.ajax({
+                        type: "GET",
+                        url: url,
+                        dataType: "json",
+                        success: function (response) {
+                            if(response.link.includes('change-status')) attrObj = response.statusObj
+                            if(response.link.includes('change-is-home')) attrObj = response.isHomeObj
+                            btn.removeClass(currentClass);
+                            btn.addClass(attrObj.class);
+                            btn.html(attrObj.name);
+                            btn.data("url", response.link);
+                            btn.data("class", attrObj.class);
+                            btn.notify("Cập nhật thành công", {
+                                position: "top center",
+                                className: "success",
+                            });
+                        },
+                    });
                 });
-            },
-        });
-    })
+        }
+
+    }
+
+    changeStateAdmin($selectChangeAttr, 'change');
+    changeStateAdmin($selectChangeOrdering, 'change');
+    changeStateAdmin($(".is-home-ajax"), 'click');
+    changeStateAdmin($(".status-ajax"), 'click');
 });
