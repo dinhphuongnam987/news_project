@@ -104,4 +104,12 @@ Route::group(['prefix' => $prefixAdmin, 'namespace' => 'Admin', 'middleware' => 
         Route::get('/', ['as' => $controllerName, 'uses' => $controller . 'form']);
         Route::post('change-password', ['as' => $controllerName . '/change-password', 'uses' => $controller . 'changePassword']);
     });
+
+    // ====================== GALLERY ========================
+    $prefix         = '';
+    $controllerName = 'gallery';
+    Route::group(['prefix' =>  $prefix], function () use ($controllerName) {
+        $controller = ucfirst($controllerName)  . 'Controller@';
+        Route::get('/gallery',                             ['as' => "$controllerName",                  'uses' => $controller . 'index']);
+    });
 });

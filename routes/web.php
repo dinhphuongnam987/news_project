@@ -22,3 +22,7 @@ Route::prefix('/')->group(function() {
     require base_path('routes/web/admin.php');
     require base_path('routes/web/news.php');
 });
+
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'permission.admin']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
