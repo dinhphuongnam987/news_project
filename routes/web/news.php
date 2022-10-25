@@ -70,6 +70,6 @@ Route::group(['prefix' => $prefixNews, 'namespace' => 'News'], function () {
     $controllerName = 'gallery';
     Route::group(['prefix' =>  $prefix], function () use ($controllerName) {
         $controller = ucfirst($controllerName)  . 'Controller@';
-        Route::get('/gallery',                             ['as' => "$controllerName/index",                  'uses' => $controller . 'index']);
+        Route::get('/thu-vien-hinh-anh',                             ['as' => "$controllerName/index",                  'uses' => $controller . 'index']);
     });
 });

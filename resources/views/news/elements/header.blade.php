@@ -48,6 +48,8 @@
 
         $xhtmlMenu .= sprintf('<li><a href="%s">Tin tức tổng hợp</a></li>', route('rss/index'));
         $xhtmlMenuMobile .= sprintf('<li class="menu_mm"><a href="%s">Tin tức tổng hợp</a></li>', route('rss/index'));
+        $xhtmlMenu .= sprintf('<li><a href="%s">Thư viện hình ảnh</a></li>', route('gallery/index'));
+        $xhtmlMenuMobile .= sprintf('<li class="menu_mm"><a href="%s">Thư viện hình ảnh</a></li>', route('gallery/index'));
 
         if (session('userInfo')) {
             $xhtmlMenuUser = sprintf('<li><a href="%s">%s</a></li>', route('auth/logout'), 'Logout');
