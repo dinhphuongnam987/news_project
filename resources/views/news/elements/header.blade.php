@@ -21,8 +21,8 @@
             $link = $item['link'];
             $typeOpen = config('zvn.template.type_open_menu')[$item['type_open']]['class'];
 
-            $xhtmlMenu .= sprintf('<li><a href="%s" target="%s">%s</a>', $link, $typeOpen, $item['name']);
-            $xhtmlMenuMobile .= sprintf('<li class="menu_mm"><a href="%s">%s</a>', $link, $item['name']);
+            $xhtmlMenu .= sprintf('<li><a href="%s" target="%s" type-menu="%s">%s</a>', $link, $typeOpen, $item['type_menu'], $item['name']);
+            $xhtmlMenuMobile .= sprintf('<li class="menu_mm"><a href="%s" type-menu="%s">%s</a>', $link, $item['type_menu'], $item['name']);
 
             if($item['type_menu']  == 'category_article') {
                 $xhtmlMenu .= '<i class="fa fa-caret-down btn-drop-down"></i>'; 
@@ -45,11 +45,6 @@
             $xhtmlMenu .= '</li>';
             $xhtmlMenuMobile .= '</li>';
         }
-
-        $xhtmlMenu .= sprintf('<li><a href="%s">Tin tức tổng hợp</a></li>', route('rss/index'));
-        $xhtmlMenuMobile .= sprintf('<li class="menu_mm"><a href="%s">Tin tức tổng hợp</a></li>', route('rss/index'));
-        $xhtmlMenu .= sprintf('<li><a href="%s">Thư viện hình ảnh</a></li>', route('gallery/index'));
-        $xhtmlMenuMobile .= sprintf('<li class="menu_mm"><a href="%s">Thư viện hình ảnh</a></li>', route('gallery/index'));
 
         if (session('userInfo')) {
             $xhtmlMenuUser = sprintf('<li><a href="%s">%s</a></li>', route('auth/logout'), 'Logout');

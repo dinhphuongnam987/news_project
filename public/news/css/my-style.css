@@ -105,6 +105,10 @@ ul.main_nav_list li.active a{
     font-size: 17px;
 }
 
+.main_nav_list li a.active {
+    color: rgb(86, 164, 246);
+}
+
 
 .container_category {
     margin-top: 0;
