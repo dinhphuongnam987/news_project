@@ -30,6 +30,7 @@ class AuthController extends Controller
     {   
         if ($request->method() == 'POST') {
             $params = $request->all();
+            $urlCurrent = $request->session()->get('urlCurrent');
 
             $userModel = new UserModel();
             $userInfo = $userModel->getItem($params, ['task' => 'auth-login']);
@@ -38,7 +39,7 @@ class AuthController extends Controller
                 return redirect()->route($this->controllerName . '/login')->with('news_notify', 'Tài khoản hoặc mật khẩu không chính xác!');
 
             $request->session()->put('userInfo', $userInfo);
-            return redirect()->route('home');
+            return redirect($urlCurrent);
         }
     }
 

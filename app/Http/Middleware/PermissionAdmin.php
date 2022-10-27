@@ -15,9 +15,12 @@ class PermissionAdmin
      */
     public function handle($request, Closure $next)
     {
+        $urlCurrent = $request->url();
+        $request->session()->put('urlCurrent', $urlCurrent);
+        
         if($request->session()->has('userInfo'))  {
             $userInfo = $request->session()->get('userInfo');
-       
+
             if ($userInfo['level'] == 'admin')  return $next($request);
             return redirect()->route('notify/noPermission');
         }
