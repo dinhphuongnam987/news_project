@@ -31,6 +31,7 @@ class AuthController extends Controller
         if ($request->method() == 'POST') {
             $params = $request->all();
             $urlCurrent = $request->session()->get('urlCurrent');
+            $urlCurrent = isset($urlCurrent) ? $urlCurrent : route('dashboard');
 
             $userModel = new UserModel();
             $userInfo = $userModel->getItem($params, ['task' => 'auth-login']);
@@ -45,7 +46,10 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {   
-        if($request->session()->has('userInfo')) $request->session()->pull('userInfo');
+        if($request->session()->has('userInfo')) {
+            $request->session()->pull('userInfo');
+            $request->session()->pull('urlCurrent');
+        }
         return redirect()->route('home');
     }
 
