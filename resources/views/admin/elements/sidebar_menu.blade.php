@@ -24,6 +24,7 @@
             <li><a href="{{ route('rss') }}"><i class="fa fa-newspaper-o"></i> Rss</a></li>
             <li><a href="{{ route('password') }}"><i class="fa fa-unlock-alt"></i> Change Password</a></li>
             <li><a href="{{ route('gallery') }}"><i class="fa fa-picture-o"></i> Gallery</a></li>
+            <li><a href="{{ route('setting') }}"><i class="fa fa-cogs"></i> Setting</a></li>
         </ul>
     </div>
 </div>

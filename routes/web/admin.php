@@ -112,4 +112,13 @@ Route::group(['prefix' => $prefixAdmin, 'namespace' => 'Admin', 'middleware' => 
         $controller = ucfirst($controllerName)  . 'Controller@';
         Route::get('/gallery',                             ['as' => "$controllerName",                  'uses' => $controller . 'index']);
     });
+
+    // ====================== SETTING ========================
+    $prefix         = 'setting';
+    $controllerName = 'setting';
+    Route::group(['prefix' =>  $prefix], function () use ($controllerName) {
+        $controller = ucfirst($controllerName)  . 'Controller@';
+        Route::get('/{key?}',      ['as' => $controllerName, 'uses' => $controller . 'index']);
+        Route::post('save', ['as' => $controllerName . '/save', 'uses' => $controller . 'save']);
+    });
 });

@@ -146,4 +146,12 @@ $(document).ready(function () {
     changeStateAdmin($selectChangeOrdering, 'change');
     changeStateAdmin($(".is-home-ajax"), 'click');
     changeStateAdmin($(".status-ajax"), 'click');
+
+
+    $('.tab').each(function() {
+        url = $(this).attr('href');
+        urlCurrent = window.location.href;
+
+        if(url == urlCurrent) $(this).addClass('tab-active');
+    })
 });
