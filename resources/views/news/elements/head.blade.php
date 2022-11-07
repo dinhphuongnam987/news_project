@@ -12,3 +12,4 @@
 <link rel="stylesheet" type="text/css" href="{{asset('news/css/main_styles.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('news/css/responsive.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('news/css/my-style.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('news/css/custom-style.css')}}">
