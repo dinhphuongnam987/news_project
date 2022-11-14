@@ -11,5 +11,7 @@
 <script src="{{asset('news/js/OwlCarousel2-2.2.1/owl.carousel.js')}}"></script>
 <script src="{{asset('news/js/easing/easing.js')}}"></script>
 <script src="{{asset('news/js/parallax-js-master/parallax.min.js')}}"></script>
+<script src="{{ asset('admin/js/notify.min.js') }}"></script>
 <script src="{{asset('news/js/custom.js')}}"></script>
 <script src="{{asset('news/js/my-js.js')}}"></script>
+<script src="{{asset('news/js/modules/contact.js')}}"></script>

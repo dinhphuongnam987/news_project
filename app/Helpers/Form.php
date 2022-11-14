@@ -3,6 +3,19 @@ namespace App\Helpers;
 use Config;
 
 class Form {
+    public static function showFormContact ($elements) {
+        $xhtml = null;
+        foreach ($elements as $element) {
+            $xhtml .= sprintf(
+                '<div class="form-group">
+                    %s
+                    %s
+                </div>', @$element['label'], $element['element']
+            );
+        }
+        return $xhtml;
+    }
+
     public static function show ($elements) { 
         $xhtml = null;
         foreach ($elements as $element) {

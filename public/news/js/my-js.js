@@ -7,7 +7,6 @@ $(document).ready(function () {
         $('#box-coin').html(data);
     }, 'html');
 
-
     $('.main_nav_list > li > a').each(function (index, ele) {
         typeMenu = $(ele).attr('type-menu');
         link = $(ele).attr('href');
@@ -27,3 +26,5 @@ $(document).ready(function () {
         }
     })
 });
+
+
