@@ -72,4 +72,13 @@ Route::group(['prefix' => $prefixNews, 'namespace' => 'News'], function () {
         $controller = ucfirst($controllerName)  . 'Controller@';
         Route::get('/thu-vien-hinh-anh',                             ['as' => "$controllerName/index",                  'uses' => $controller . 'index']);
     });
+
+    // ====================== CONTACT ========================
+    $prefix         = '';
+    $controllerName = 'contact';
+    Route::group(['prefix' =>  $prefix], function () use ($controllerName) {
+        $controller = ucfirst($controllerName)  . 'Controller@';
+        Route::get('/lien-he',             ['as' => "$controllerName/index", 'uses' => $controller . 'index']);
+        Route::post("$controllerName/save", ['as' => "$controllerName/save", 'uses' => $controller . 'save']);
+    });
 });

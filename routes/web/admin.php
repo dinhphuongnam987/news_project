@@ -121,4 +121,14 @@ Route::group(['prefix' => $prefixAdmin, 'namespace' => 'Admin', 'middleware' => 
         Route::get('/{key?}',      ['as' => $controllerName, 'uses' => $controller . 'index']);
         Route::post('save', ['as' => $controllerName . '/save', 'uses' => $controller . 'save']);
     });
+
+    // ====================== SETTING ========================
+    $prefix         = 'contact';
+    $controllerName = 'contact';
+    Route::group(['prefix' =>  $prefix], function () use ($controllerName) {
+        $controller = ucfirst($controllerName)  . 'Controller@';
+        Route::get('',      ['as' => $controllerName, 'uses' => $controller . 'index']);
+        Route::get('change-status-{status}/{id}', ['as' => $controllerName . '/status', 'uses' => $controller . 'status']);
+        Route::get('delete/{id}', ['as' => $controllerName . '/delete', 'uses' => $controller . 'delete'])->where('id', '[0-9]+');
+    });
 });

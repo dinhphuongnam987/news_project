@@ -28,6 +28,8 @@ return [
             'active'   => ['name' => 'Kích hoạt', 'class'      => 'btn-success'],
             'inactive' => ['name' => 'Chưa kích hoạt', 'class' => 'btn-info'],
             'block' => ['name' => 'Bị khóa', 'class' => 'btn-danger'],
+            'contacted'    => ['name' => 'Đã liên lạc', 'class' => 'btn-success'],
+            'uncontacted'  => ['name' => 'Chưa liên lạc', 'class' => 'btn-info'],
             'default'      => ['name' => 'Chưa xác định', 'class' => 'btn-success'],
         ],
         'is_home'       => [
@@ -95,6 +97,7 @@ return [
             'rss'   => ['edit', 'delete'],
             'user'      => ['edit'],
             'menu'      => ['edit', 'delete'],
+            'contact'   => ['delete'],
         ]
     ]
     
