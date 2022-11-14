@@ -35,6 +35,10 @@
             'element' => Form::time('end_time', @$item['end_time'],  $formInputAttr )
         ],
         [
+            'label'   => Form::label('map', 'Map', $formLabelAttr),
+            'element' => Form::text('map', @$item['map'],  $formInputAttr )
+        ],
+        [
             'label'   => Form::label('copyright', 'Copyright', $formLabelAttr),
             'element' => Form::text('copyright', @$item['copyright'],  $formInputAttr )
         ],
