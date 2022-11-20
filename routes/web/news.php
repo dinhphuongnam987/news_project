@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 $prefixNews  = config('zvn.url.prefix_news');
 
-Route::group(['prefix' => $prefixNews, 'namespace' => 'News'], function () {
+Route::group(['prefix' => $prefixNews, 'namespace' => 'News', 'middleware' => 'minify'], function () {
     // ============================== HOMEPAGE ==============================
     $prefix         = '';
     $controllerName = 'home';
