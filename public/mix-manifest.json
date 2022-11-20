@@ -1,0 +1,10 @@
+{
+    "/admin/css/all-css.css": "/admin/css/all-css.css",
+    "/news/css/all-css.css": "/news/css/all-css.css",
+    "/admin/js/all-js.js": "/admin/js/all-js.js",
+    "/news/js/all-js.js": "/news/js/all-js.js",
+    "/admin/css/all-css.min.css": "/admin/css/all-css.min.css",
+    "/news/css/all-css.min.css": "/news/css/all-css.min.css",
+    "/admin/js/all-js.min.js": "/admin/js/all-js.min.js",
+    "/news/js/all-js.min.js": "/news/js/all-js.min.js"
+}

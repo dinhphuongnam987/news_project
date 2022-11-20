@@ -1,6 +1,6 @@
 
 
-<script src="{{asset('news/js/jquery-3.2.1.min.js')}}"></script>
+{{-- <script src="{{asset('news/js/jquery-3.2.1.min.js')}}"></script>
 <script src="{{asset('news/css/bootstrap-4.1.2/popper.js')}}"></script>
 <script src="{{asset('news/css/bootstrap-4.1.2/bootstrap.min.js')}}"></script>
 <script src="{{asset('news/js/greensock/TweenMax.min.js')}}"></script>
@@ -14,4 +14,5 @@
 <script src="{{ asset('admin/js/notify.min.js') }}"></script>
 <script src="{{asset('news/js/custom.js')}}"></script>
 <script src="{{asset('news/js/my-js.js')}}"></script>
-<script src="{{asset('news/js/modules/contact.js')}}"></script>
+<script src="{{asset('news/js/modules/contact.js')}}"></script> --}}
+<script src="{{asset('news/js/all-js.min.js')}}"></script>
