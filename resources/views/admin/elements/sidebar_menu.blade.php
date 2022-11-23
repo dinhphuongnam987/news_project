@@ -26,7 +26,7 @@
             <li><a href="{{ route('gallery') }}"><i class="fa fa-picture-o"></i> Gallery</a></li>
             <li><a href="{{ route('setting') }}"><i class="fa fa-cogs"></i> Setting</a></li>
             <li><a href="{{ route('contact') }}"><i class="fa fa-envelope"></i> Contact</a></li>
-            <li><a href="{{ url('log-viewer') }}"><i class="fa fa-exclamation-circle"></i> Log Error</a></li>
+            <li><a href="{{ route('log-viewer') }}"><i class="fa fa-exclamation-circle"></i> Log Error</a></li>
         </ul>
     </div>
 </div>

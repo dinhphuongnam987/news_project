@@ -131,4 +131,12 @@ Route::group(['prefix' => $prefixAdmin, 'namespace' => 'Admin', 'middleware' => 
         Route::get('change-status-{status}/{id}', ['as' => $controllerName . '/status', 'uses' => $controller . 'status']);
         Route::get('delete/{id}', ['as' => $controllerName . '/delete', 'uses' => $controller . 'delete'])->where('id', '[0-9]+');
     });
+
+    // ====================== LOG VIEWER ========================
+    $prefix         = 'log-viewer';
+    Route::group(['prefix' =>  $prefix], function () {
+        Route::get('', function() {
+            return view('admin.pages.log.index');
+        })->name('log-viewer');
+    });
 });
