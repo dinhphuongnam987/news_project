@@ -6,16 +6,13 @@ use App\Models\AdminModel;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Kalnoy\Nestedset\NodeTrait;
 
 class CategoryModel extends AdminModel
 {
-    public function __construct()
-    {
-        $this->table               = 'category';
-        $this->folderUpload        = 'category';
-        $this->fieldSearchAccepted = ['id', 'name'];
-        $this->crudNotAccepted     = ['_token'];
-    }
+    use NodeTrait;
+    protected $table = 'category';
+    protected $guarded = [];
 
     public function listItems($params = null, $options = null)
     {
@@ -60,12 +57,14 @@ class CategoryModel extends AdminModel
             $result = $query->get()->toArray();
         }
 
-        if ($options['task'] == "admin-list-items-in-selectbox") {
-            $query = $this->select('id', 'name')
-                ->orderBy('name', 'asc')
-                ->where('status', '=', 'active');
+        if ($options['task'] == "admin-list-items-in-select-box") {
+            $query = self::select('id', 'name')->where('_lft', '<>', NULL)->withDepth()->defaultOrder();
 
-            $result = $query->pluck('name', 'id')->toArray();
+            $nodes = $query->get()->toFlatTree();
+            
+            foreach($nodes as $value) {
+                $result[$value['id']] = str_repeat('|---', $value['depth']) . $value['name'];
+            }
         }
         return $result;
     }
@@ -103,7 +102,7 @@ class CategoryModel extends AdminModel
         $result = null;
 
         if ($options['task'] == 'get-item') {
-            $result = self::select('id', 'name', 'status')->where('id', $params['id'])->first();
+            $result = self::select('id', 'name', 'parent_id', 'status')->where('id', $params['id'])->first();
         }
 
         if ($options['task'] == 'news-get-item') {
@@ -133,9 +132,11 @@ class CategoryModel extends AdminModel
         }
 
         if ($options['task'] == 'add-item') {
-            $params['created_by'] = "hailan";
-            $params['created']    = date('Y-m-d');
-            self::insert($this->prepareParams($params));
+            $params['created_by'] = session('userInfo')['username'];
+            $params['created']    = date('Y-m-d h:i:s');
+            $parent = self::find($params['parent_id']);
+
+            self::create($this->prepareParams($params), $parent);
         }
 
         if ($options['task'] == 'edit-item') {

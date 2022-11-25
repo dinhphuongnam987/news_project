@@ -35,6 +35,21 @@ class CategoryController extends AdminController
         }
     }
 
+    public function form(Request $request)
+    {
+        $item = null;
+        if ($request->id !== null) {
+            $this->params["id"] = $request->id;
+            $item = $this->model->getItem($this->params, ['task' => 'get-item']);
+        }
+        $nodes = $this->model->listItems($this->params, ['task' => 'admin-list-items-in-select-box']);
+
+        return view($this->pathViewController .  'form', [
+            'item'        => $item,
+            'nodes'       => $nodes
+        ]);
+    }
+
     public function isHome(Request $request)
     {
         $params["currentIsHome"]  = $request->is_home;

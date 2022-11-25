@@ -16,6 +16,10 @@
             'element' => Form::text('name', @$item['name'], $formInputAttr )
         ],
         [
+            'label'   => Form::label('parent', 'Parent', $formLabelAttr),
+            'element' => Form::select('parent_id', $nodes, @$item['parent_id'], $formInputAttr)
+        ],
+        [
             'label'   => Form::label('status', 'Status', $formLabelAttr),
             'element' => Form::select('status', $statusValue, @$item['status'], $formInputAttr)
         ],
