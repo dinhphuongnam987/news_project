@@ -41,8 +41,7 @@ class CategoryModel extends AdminModel
                 }
             }
 
-            $result =  $query->orderBy('id', 'desc')
-                ->paginate($params['pagination']['totalItemsPerPage']);
+            $result =  $query->get();
         }
 
         if ($options['task'] == 'news-list-items') {
