@@ -1,6 +1,7 @@
 <?php 
 namespace App\Helpers;
 use Config;
+use App\Models\CategoryModel;
 
 class Template {
     public static function showButtonFilter ($controllerName, $itemsStatusCount, $currentFilterStatus, $paramsSearch) { // $currentFilterStatus active inactive all
@@ -162,6 +163,36 @@ class Template {
         $xhtml = sprintf('<input type="number" class="ordering" name="ordering"
         min="1" max="100" data-url="%s" value="%s">', $link, $ordering);
 
+        return $xhtml;
+    }
+
+    public static function showNestedSetName($name, $level) {
+        $xhtml = str_repeat('|----', $level - 1);
+        $xhtml .= sprintf(
+            '<span class="badge badge-dark">%s</span>
+            <strong>%s</strong>',$level, $name
+        );
+        return $xhtml;
+    }
+
+    public static function showNestedSetUpDown ($controllerName, $id)
+    {
+        $upButton = sprintf('
+            <a href="%s" type="button" class="btn btn-primary-mb-0" data-toggle="tooltip" title="" data-original-title="Up">
+            <i class="fa fa-long-arrow-up"></i>
+            </a>', route("$controllerName/move", ['id' => $id, 'type' => 'up']));
+
+        $downButton = sprintf('
+            <a href="%s" type="button" class="btn btn-primary-mb-0" data-toggle="tooltip" title="" data-original-title="Down">
+            <i class="fa fa-long-arrow-down"></i>
+            </a>', route("$controllerName/move", ['id' => $id, 'type' => 'down']));
+
+        $node = CategoryModel::find($id);
+        if (empty($node->getPrevSibling()) || empty($node->getPrevSibling()->parent_id)) $upButton = '';
+        if (empty($node->getNextSibling())) $downButton = '';
+
+        $xhtml = '<span style="width: 36px; display: inline-block">' . $upButton . '</span>
+            <span style="width: 36px; display: inline-block">' . $downButton . '</span>';
         return $xhtml;
     }
 }

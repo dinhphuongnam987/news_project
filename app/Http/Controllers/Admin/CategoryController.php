@@ -72,4 +72,12 @@ class CategoryController extends AdminController
             'status' => 'success'
         ]);
     }
+
+    public function move(Request $request)
+    {
+        $params['type']   = $request->type;
+        $params['id']     = $request->id;
+        $this->model->move($params, null);
+        return redirect()->route($this->controllerName);
+    }
 }
