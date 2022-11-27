@@ -60,6 +60,10 @@ class CategoryModel extends AdminModel
         if ($options['task'] == "admin-list-items-in-select-box") {
             $query = self::select('id', 'name')->where('_lft', '<>', NULL)->withDepth()->defaultOrder();
 
+            if(isset($params['id'])) {
+                $node = self::find($params['id']);
+                $query->where('_lft', '<', $node->_lft)->orWhere('_lft', '>', $node->_rgt);
+            }
             $nodes = $query->get()->toFlatTree();
             
             foreach($nodes as $value) {
@@ -140,9 +144,13 @@ class CategoryModel extends AdminModel
         }
 
         if ($options['task'] == 'edit-item') {
-            $params['modified_by']   = "hailan";
-            $params['modified']      = date('Y-m-d');
-            self::where('id', $params['id'])->update($this->prepareParams($params));
+            $params['created_by'] = session('userInfo')['username'];
+            $params['created']    = date('Y-m-d h:i:s');
+
+            $parent = self::find($params['parent_id']);
+            $query = $current = self::find($params['id']);
+            $query->update($this->prepareParams($params));
+            if($current['parent_id'] !== $params['parent_id']) $query->prependToNode($parent)->save();
         }
     }
 
