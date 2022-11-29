@@ -15,3 +15,4 @@
 <link rel="stylesheet" type="text/css" href="{{asset('news/css/custom-style.css')}}"> --}}
 <link rel="stylesheet" type="text/css" href="{{asset('news/css/font-awesome-4.7.0/css/font-awesome.min.css')}}" >
 <link rel="stylesheet" type="text/css" href="{{asset('news/css/all-css.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('news/css/dropdown-menu.css')}}">

@@ -28,11 +28,14 @@ class CategoryModel extends AdminModel
         }
 
         if ($options['task'] == 'news-list-items') {
-            $query = $this->select('id', 'name')
-                ->where('status', '=', 'active')
-                ->limit(8);
+            $result = self::withDepth()
+                    ->having('depth', '>', 0)
+                    ->defaultOrder()
+                    ->get()
+                    ->toTree()
+                    ->toArray();
 
-            $result = $query->get()->toArray();
+            // $result = $query->get()->toArray();
         }
 
         if ($options['task'] == 'news-list-items-is-home') {

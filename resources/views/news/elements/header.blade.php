@@ -16,34 +16,53 @@
         
         $xhtmlMenu = '<nav class="main_nav"><ul class="main_nav_list d-flex flex-row align-items-center justify-content-start">';
         $xhtmlMenuMobile = '<nav class="menu_nav"><ul class="menu_mm">';
-
         foreach ($itemsMenu as $item) {
             $link = $item['link'];
             $typeOpen = config('zvn.template.type_open_menu')[$item['type_open']]['class'];
 
-            $xhtmlMenu .= sprintf('<li><a href="%s" target="%s" type-menu="%s">%s</a>', $link, $typeOpen, $item['type_menu'], $item['name']);
-            $xhtmlMenuMobile .= sprintf('<li class="menu_mm"><a href="%s" type-menu="%s">%s</a>', $link, $item['type_menu'], $item['name']);
-
             if($item['type_menu']  == 'category_article') {
-                $xhtmlMenu .= '<i class="fa fa-caret-down btn-drop-down"></i>'; 
-                $xhtmlMenu .= '<div class="sub_menu">'; 
-                $xhtmlMenuMobile .= '<i class="fa fa-caret-down btn-drop-down"></i>'; 
-                $xhtmlMenuMobile .= '<div class="sub_menu">'; 
+                $xhtmlMenu .= sprintf(
+                    '<li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="%s" target="%s" type-menu="%s">%s</a>
+                        <ul class="dropdown-menu">', 
+                    $link, $typeOpen, $item['type_menu'], $item['name']); 
 
-                foreach ($itemsCategory as $category) {
-                    $categoryIdCurrent = Route::input('category_id');
-                    $link       =  URL::linkCategory($category['id'], $category['name']);
-                    $classActive = ($categoryIdCurrent == $category['id']) ? 'class="active"' : '';
+                $xhtmlMenuMobile .= sprintf(
+                    '<li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="%s" target="%s" type-menu="%s">%s</a>
+                        <ul class="dropdown-menu">', 
+                    $link, $typeOpen, $item['type_menu'], $item['name']); 
 
-                    $xhtmlMenu .= sprintf('<a href="%s">%s</a>', $link, $category['name']);
-                    $xhtmlMenuMobile .= sprintf('<a href="%s">%s</a>', $link, $category['name']);
-                }   
-                $xhtmlMenu .= '</div>';
-                $xhtmlMenuMobile .= '</div>';
+                $recursiveMenu = function($itemsCategory) use($link, &$xhtmlMenu, &$xhtmlMenuMobile, &$recursiveMenu) {
+                    foreach ($itemsCategory as $category) {
+                        $categoryIdCurrent = Route::input('category_id');
+                        $link       =  URL::linkCategory($category['id'], $category['name']);
+                        $classActive = ($categoryIdCurrent == $category['id']) ? 'class="active"' : '';
+
+                        $xhtmlMenu .= sprintf('<li><a class="dropdown-item" href="%s">%s</a>', $link, $category['name']);
+                        $xhtmlMenuMobile .= sprintf('<li><a class="dropdown-item" href="%s">%s</a>', $link, $category['name']);
+                        
+                        if(!(empty($category['children']))) {
+                                $xhtmlMenu .= '<ul class="submenu dropdown-menu">';
+                                $xhtmlMenuMobile .= '<ul class="submenu dropdown-menu">';
+                                $recursiveMenu($category['children']);
+                                $xhtmlMenu .= '</ul>';
+                                $xhtmlMenuMobile .= '</ul>';
+                            }
+                        }   
+                        $xhtmlMenu .= '</li>';
+                        $xhtmlMenuMobile .= '</li>';
+                };
+                $recursiveMenu($itemsCategory);
+
+                $xhtmlMenu .= '</ul></li>';
+                $xhtmlMenuMobile .= '</ul></li>';
+            } else {
+                $xhtmlMenu .= sprintf('<li><a href="%s" target="%s" type-menu="%s">%s</a>', $link, $typeOpen, $item['type_menu'], $item['name']);
+                $xhtmlMenuMobile .= sprintf('<li class="menu_mm"><a href="%s" type-menu="%s">%s</a>', $link, $item['type_menu'], $item['name']);
+                $xhtmlMenu .= '</li>';
+                $xhtmlMenuMobile .= '</li>';
             }
-
-            $xhtmlMenu .= '</li>';
-            $xhtmlMenuMobile .= '</li>';
         }
 
         if (session('userInfo')) {
@@ -116,3 +135,61 @@
     
     
 </div>
+
+<style>
+@media (min-width: 992px){
+	.dropdown-menu .dropdown-toggle:after{
+		border-top: .3em solid transparent;
+	    border-right: 0;
+	    border-bottom: .3em solid transparent;
+	    border-left: .3em solid;
+	}
+	.dropdown-menu .dropdown-menu{
+		margin-left:0; margin-right: 0;
+	}
+	.dropdown-menu li{
+		position: relative;
+	}
+	.nav-item .submenu{ 
+		display: none;
+		position: absolute;
+		left:100%; top:-7px;
+	}
+	.nav-item .submenu-left{ 
+		right:100%; left:auto;
+	}
+	.dropdown-menu > li:hover{ background-color: #f1f1f1 }
+	.dropdown-menu > li:hover > .submenu{
+		display: block;
+	}
+}
+</style>
+
+{{-- <ul class="navbar-nav">
+    <li class="nav-item"> <a class="nav-link" href="#"> First level 1 </a> </li>
+    <li class="nav-item"> <a class="nav-link" href="#"> First level 2 </a></li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">  First level 3  </a>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#"> Second level 1 </a></li>
+          <li><a class="dropdown-item" href="#"> Second level 2 &raquo </a>
+             <ul class="submenu dropdown-menu">
+                <li><a class="dropdown-item" href=""> Third level 1</a></li>
+                <li><a class="dropdown-item" href=""> Third level 2</a></li>
+                <li><a class="dropdown-item" href=""> Third level 3 &raquo </a>
+                <ul class="submenu dropdown-menu">
+                    <li><a class="dropdown-item" href=""> Fourth level 1</a></li>
+                    <li><a class="dropdown-item" href=""> Fourth level 2</a></li>
+                </ul>
+                </li>
+                <li><a class="dropdown-item" href=""> Second level  4</a></li>
+                <li><a class="dropdown-item" href=""> Second level  5</a></li>
+             </ul>
+          </li>
+          <li><a class="dropdown-item" href="#"> Dropdown item 3 </a></li>
+          <li><a class="dropdown-item" href="#"> Dropdown item 4 </a>
+        </ul>
+    </li>
+    <li class="nav-item"> <a class="nav-link" href="#"> First level 1 </a> </li>
+    <li class="nav-item"> <a class="nav-link" href="#"> First level 2 </a></li>
+</ul> --}}
