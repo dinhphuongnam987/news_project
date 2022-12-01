@@ -23,8 +23,8 @@ class ArticleModel extends AdminModel
         $result = null;
 
         if ($options['task'] == "admin-list-items") {
-            $query = $this->select('a.id', 'a.name', 'a.status', 'a.content', 'a.thumb', 'a.type', 'c.name as category_name')
-                ->leftJoin('category as c', 'a.category_id', '=', 'c.id');
+            $query = $this->select('a.id', 'a.name', 'a.status', 'a.content', 'a.thumb', 'a.type', 'c.name as category_name', 'c.id as category_id', 'c.parent_id as category_parent')
+                ->join('category as c', 'a.category_id', '=', 'c.id');
 
 
             if ($params['filter']['status'] !== "all") {
@@ -41,6 +41,13 @@ class ArticleModel extends AdminModel
                 } else if (in_array($params['search']['field'], $this->fieldSearchAccepted)) {
                     $query->where('a.' . $params['search']['field'], 'LIKE',  "%{$params['search']['value']}%");
                 }
+            }
+
+            if(!empty($params['filter']['category']) && $params['filter']['category'] !== "all") {
+                $query->where(function ($query) use ($params) {
+                    $query->where('c.id', $params['filter']['category'])
+                          ->orWhere('c.parent_id', $params['filter']['category']);
+                });
             }
 
             $result =  $query->orderBy('a.id', 'desc')

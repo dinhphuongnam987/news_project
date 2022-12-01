@@ -8,6 +8,7 @@ $(document).ready(function () {
     let $inputLinkMenu    = $("#link_menu");
     let $selectTypeMenu   = $("#type_menu");
     let $selectChangeOrdering = $(".ordering");
+    let $selectChangeCategory = $("#filter_category");
 
     $("a.select-field").click(function (e) {
         e.preventDefault();
@@ -22,7 +23,7 @@ $(document).ready(function () {
 
     $btnSearch.click(function () {
         var pathname = window.location.pathname;
-        let params = ["filter_status"];
+        let params = ["filter_status", "filter_category"];
         let searchParams = new URLSearchParams(window.location.search); // ?filter_status=active
 
         let link = "";
@@ -54,7 +55,7 @@ $(document).ready(function () {
         var pathname = window.location.pathname;
         let searchParams = new URLSearchParams(window.location.search);
 
-        params = ["filter_status"];
+        params = ["filter_status", "filter_category"];
 
         let link = "";
         $.each(params, function (key, param) {
@@ -153,5 +154,34 @@ $(document).ready(function () {
         urlCurrent = window.location.href;
 
         if(url == urlCurrent) $(this).addClass('tab-active');
+    })
+
+    $selectChangeCategory.change(function() {
+        var pathname = window.location.pathname;
+        let params = ["filter_status", "search_field", ""];
+        let searchParams = new URLSearchParams(window.location.search);
+
+        let link = "";
+        $.each(params, function (key, param) {
+            if (searchParams.has(param)) {
+                link += param + "=" + searchParams.get(param) + "&";
+            }
+        });
+
+        $(this).addClass('active');
+        let category_value = $(this).val();
+        window.location.href =
+            pathname +
+            "?" +
+            link +
+            "filter_category=" +
+            category_value
+    })
+
+    $('#filter_category > option').each(function() {
+        let searchParams = new URLSearchParams(window.location.search);
+        currentCategory = searchParams.get('filter_category');
+
+        if(currentCategory === $(this).val()) $(this).attr('selected', true);
     })
 });

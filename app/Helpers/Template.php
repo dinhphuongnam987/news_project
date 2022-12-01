@@ -4,7 +4,7 @@ use Config;
 use App\Models\CategoryModel;
 
 class Template {
-    public static function showButtonFilter ($controllerName, $itemsStatusCount, $currentFilterStatus, $paramsSearch) { // $currentFilterStatus active inactive all
+    public static function showButtonFilter ($controllerName, $itemsStatusCount, $currentFilterStatus, $paramsSearch, $paramsCategory = null) { // $currentFilterStatus active inactive all
         $xhtml = null;
         $tmplStatus = Config::get('zvn.template.status');
 
@@ -20,6 +20,10 @@ class Template {
 
                 $currentTemplateStatus = $tmplStatus[$statusValue]; // $value['status'] inactive block active
                 $link = route($controllerName) . "?filter_status=" .  $statusValue;
+
+                if($paramsCategory !== ''){
+                    $link .= "&filter_category=" . $paramsCategory;
+                }
 
                 if($paramsSearch['value'] !== ''){
                     $link .= "&search_field=" . $paramsSearch['field'] . "&search_value=" .  $paramsSearch['value'];

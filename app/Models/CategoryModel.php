@@ -59,6 +59,22 @@ class CategoryModel extends AdminModel
                 $result[$value['id']] = str_repeat('|---', $value['depth']) . $value['name'];
             }
         }
+
+        if ($options['task'] == "admin-list-items-in-select-box-in-article") {
+            $nodes = self::select('id', 'name')
+                    ->where('_lft', '<>', NULL)
+                    ->withDepth()
+                    ->having('depth', '>', 0)
+                    ->defaultOrder()
+                    ->get()
+                    ->toFlatTree()
+                    ->toArray();
+        
+            foreach($nodes as $value) {
+                $result['all'] = 'Tất cả';
+                $result[$value['id']] = str_repeat('|---', $value['depth'] - 1) . $value['name'];
+            }
+        }
         return $result;
     }
 
