@@ -161,6 +161,10 @@ class ArticleModel extends AdminModel
     public function saveItem($params = null, $options = null)
     {
         $this->table = 'article';
+        if($options['task'] == 'change-category') {
+            self::where('id', $params['id'])->update(['category_id' => $params['category_id']]);
+        }
+
         if ($options['task'] == 'change-status') {
             $status = ($params['currentStatus'] == "active") ? "inactive" : "active";
             self::where('id', $params['id'])->update(['status' => $status]);

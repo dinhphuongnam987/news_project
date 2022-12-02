@@ -119,6 +119,21 @@ class Template {
         return $xhtml;
     }
 
+    public static function showCategorySelect($controllerName, $id, $categoryId, $itemsCategory)
+    {
+        $link          = route($controllerName . '/category', ['category_id' => 'value_new', 'id' => $id]);
+        $xhtml = sprintf('<select name="select_change_attr" data-url="%s" class="form-control">', $link  );
+        unset($itemsCategory['all']);
+        foreach ($itemsCategory as $key => $value) {
+            $xhtmlSelected = '';
+            if ($key == $categoryId) $xhtmlSelected = 'selected="selected"';
+            $xhtml .= sprintf('<option value="%s" %s>%s</option>', $key, $xhtmlSelected, $value);
+        }
+        $xhtml .= '</select>';
+
+        return $xhtml;
+    }
+
     public static function showItemThumb ($controllerName, $thumbName, $thumbAlt) {
         $xhtml = sprintf(
             '<img src="%s" alt="%s" class="zvn-thumb">', asset("images/$controllerName/$thumbName")  , $thumbAlt );

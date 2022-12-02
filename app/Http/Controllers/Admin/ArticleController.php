@@ -61,4 +61,14 @@ class ArticleController extends AdminController
             'status' => 'success'
         ]);
     }
+
+    public function category(Request $request)
+    {
+        $params["category_id"]   = $request->category_id;;
+        $params["id"]            = $request->id;
+        $this->model->saveItem($params, ['task' => 'change-category']);
+        return response()->json([
+            'status' => 'success'
+        ]);
+    }
 }

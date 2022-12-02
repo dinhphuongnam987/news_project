@@ -28,7 +28,7 @@
                             $name            = Hightlight::show($val['name'], $params['search'], 'name');
                             $content         = Hightlight::show($val['content'], $params['search'], 'content');
                             $thumb           = Template::showItemThumb($controllerName, $val['thumb'], $val['name']);
-                            $categoryName    = $val['category_name'];
+                            $category    = Template::showCategorySelect($controllerName, $val['id'], $val['category_id'], $itemsCategory);
                             $status          = Template::showItemStatus($controllerName, $id, $val['status']); 
                             $type            = Template::showItemSelect($controllerName, $id, $val['type'], 'type');
                             // $createdHistory  = Template::showItemHistory($val['created_by'], $val['created']);
@@ -45,7 +45,7 @@
                             <td width="14%">
                                 <p>{!! $thumb !!}</p>
                             </td>
-                            <td >{!! $categoryName !!}</td>
+                            <td >{!! $category !!}</td>
                             <td>{!! $type   !!}</td>
                             <td>{!! $status !!}</td>
                             {{-- <td>{!! $createdHistory !!}</td>
