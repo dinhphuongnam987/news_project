@@ -27,7 +27,8 @@ class ArticleController extends AdminController
         }
 
         $categoryModel  = new CategoryModel();
-        $itemsCategory  = $categoryModel->listItems(null, ['task' => 'admin-list-items-in-select-box']);
+        $itemsCategory  = $categoryModel->listItems(null, ['task' => 'admin-list-items-in-select-box-in-article']);
+        unset($itemsCategory['all']);
 
         return view($this->pathViewController .  'form', [
             'item'        => $item,
