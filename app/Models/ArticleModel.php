@@ -155,6 +155,24 @@ class ArticleModel extends AdminModel
             if ($result) $result = $result->toArray();
         }
 
+        if ($options['task'] == 'news-get-bread-crumb-item') {
+            $result = self::select('a.category_id', 'c.name as category_name', 'c.parent_id as category_parent')
+            ->leftJoin('category as c', 'a.category_id', '=', 'c.id')
+            ->where('a.id', '=', $params['article_id'])
+            ->where('a.status', '=', 'active')->first();
+            if ($result) $result = $result->toArray();
+
+            $breadCrumb = [];
+            $recursiveCategoryParent = function($category_id) use (&$recursiveCategoryParent, &$breadCrumb) {
+                $category = DB::table('category')->select('name', 'id', 'parent_id')->where('id',  $category_id)->first();
+                $breadCrumb[$category->id] = $category->name;
+                if($category->parent_id > 1) {
+                    $recursiveCategoryParent($category->parent_id);
+                }
+                return array_reverse($breadCrumb, TRUE);
+            };
+            $result = $recursiveCategoryParent($result['category_id']);
+        }
         return $result;
     }
 

@@ -32,6 +32,7 @@ class ArticleController extends Controller
         
         $params["category_id"]  = $itemArticle['category_id'];
         $itemArticle['related_articles'] = $articleModel->listItems($params, ['task' => 'news-list-items-related-in-category']);
+        $itemArticle['bread_crumb'] = $articleModel->getItem($params, ['task' => 'news-get-bread-crumb-item']);
        
         return view($this->pathViewController .  'index', [
             'params'        => $this->params,

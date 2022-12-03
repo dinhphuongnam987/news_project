@@ -1,6 +1,10 @@
 @php
     use App\Helpers\URL;
-    $linkCategory  =  URL::linkCategory($item['category_id'], $item['category_name']);
+    $breadCrumb = null;
+    foreach($item['bread_crumb'] as $key => $val) {
+        $linkCategory = URL::linkCategory($key, $val);
+        $breadCrumb .= sprintf('<li><a href="%s">%s</a></li>', $linkCategory, $val);
+    }
 @endphp
 
 <div class="home">
@@ -14,7 +18,7 @@
                         <div class="breadcrumbs">
                             <ul class="d-flex flex-row align-items-start justify-content-start">
                                 <li><a href="{!! route('home')!!}">Trang chủ</a></li>
-                                <li><a href="{!! $linkCategory !!}">{!! $item['category_name'] !!}</a></li>
+                                {!! $breadCrumb !!}
                                 <li>{!! $item['name'] !!}</li>
                             </ul>
                         </div>
