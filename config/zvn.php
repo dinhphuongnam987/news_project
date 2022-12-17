@@ -71,6 +71,7 @@ return [
             'description'   => ['name'=> 'Search by Description'],
             'link'          => ['name'=> 'Search by Link'],
             'content'       => ['name'=> 'Search by Content'],
+            'code'          => ['name'=> 'Search by Code'],
             
         ],
         'button' => [
@@ -88,6 +89,7 @@ return [
             'article'   => ['all', 'name', 'content'],
             'rss'       => ['all', 'name', 'link'],
             'user'      => ['all', 'username', 'email', 'fullname'],
+            'product'   => ['all', 'name', 'code'],
         ],
         'button' => [
             'default'   => ['edit', 'delete'],
@@ -98,6 +100,7 @@ return [
             'user'      => ['edit'],
             'menu'      => ['edit', 'delete'],
             'contact'   => ['delete'],
+            'product'   => ['edit', 'delete'],
         ]
     ]
     
