@@ -71,8 +71,17 @@
             $xhtmlMenuUser = sprintf('<li><a href="%s">%s</a></li>', route('auth/login'), 'Login');
         }
 
-        $xhtmlMenu .= $xhtmlMenuUser . '</ul></nav>';
-        $xhtmlMenuMobile .= $xhtmlMenuUser . '</ul></nav>';
+        $xhtmlMenu .= $xhtmlMenuUser;
+        $xhtmlMenuMobile .= $xhtmlMenuUser;
+
+        if(!empty(request()->cookie('cart'))) {
+            $cart = json_decode(request()->cookie('cart'));
+            $total = count(get_object_vars($cart));
+            $total = "($total)";
+        } 
+
+        $xhtmlMenu .= sprintf('<li><a href="%s" target="" type-menu="" class="shopping-cart d-flex">
+            <i class="fa fa-shopping-cart" aria-hidden="true"></i>%s</a></ul></nav>', route('product/cart'), $total ?? '');
     }
 
 @endphp

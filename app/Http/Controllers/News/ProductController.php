@@ -68,7 +68,7 @@ class ProductController extends Controller
         return view($this->pathViewController . 'cart.checkout.index', compact('title', 'cartDetail'));
     }
 
-    public function order(Request $request) {
+    public function order(MainRequest $request) {
         $params['name'] = $request->name;
         $params['phone'] = $request->phone;
         $params['email'] = $request->email;

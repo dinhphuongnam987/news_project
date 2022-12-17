@@ -65,5 +65,6 @@ class Kernel extends HttpKernel
         'check.login' => \App\Http\Middleware\CheckLogin::class,
         'permission.admin' => \App\Http\Middleware\PermissionAdmin::class,
         'minify' => \App\Http\Middleware\OptimizeMiddleware::class,
+        'check.cart' => \App\Http\Middleware\CheckCart::class,
     ];
 }

@@ -17,3 +17,4 @@
 <script src="{{asset('news/js/modules/contact.js')}}"></script> --}}
 <script src="{{asset('news/js/all-js.min.js')}}"></script>
 <script src="{{asset('news/js/dropdown-menu.js')}}"></script>
+<script src="{{asset('news/js/modules/cart.js')}}"></script>
