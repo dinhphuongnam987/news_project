@@ -556,7 +556,7 @@ section
 }
 .main_nav_list li:not(:last-child)
 {
-	margin-right: 43px;
+	margin-right: 40px;
 }
 .main_nav_list li a
 {

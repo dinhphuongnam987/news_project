@@ -13,6 +13,21 @@ Route::group(['prefix' => $prefixNews, 'namespace' => 'News', 'middleware' => 'm
         Route::get('/',                             ['as' => $controllerName,                  'uses' => $controller . 'index']);
     });
 
+    // ============================== PRODUCT ==============================
+    $prefix         = 'san-voucher';
+    $controllerName = 'product';
+    Route::group(['prefix' =>  $prefix], function () use ($controllerName) {
+        $controller = ucfirst($controllerName)  . 'Controller@';
+        Route::get('', ['as' => "$controllerName/index", 'uses' => $controller . 'index']);
+        Route::get('/gio-hang', ['as' => "$controllerName/cart", 'uses' => $controller . 'cart']);
+        Route::get('/add-cart-{id}', ['as' => "$controllerName/add-cart", 'uses' => $controller . 'addCart']);
+        Route::get('/delete-cart-{id}', ['as' => "$controllerName/delete-cart", 'uses' => $controller . 'deleteCartItem']);
+        Route::get('/change-qty-{id}-{quantity}', ['as' => "$controllerName/change-qty", 'uses' => $controller . 'changeQtyCart']);
+        Route::get('/thanh-toan', ['as' => "$controllerName/check-out", 'uses' => $controller . 'checkOut'])->middleware('check.cart');
+        Route::post('/order', ['as' => "$controllerName/order", 'uses' => $controller . 'order'])->middleware('check.cart');
+        Route::get('/thank-you', ['as' => "$controllerName/thank-you", 'uses' => $controller . 'thank'])->middleware('check.cart');
+    });
+
     // ============================== CATEGORY ==============================
     $prefix         = 'chuyen-muc';
     $controllerName = 'category';

@@ -214,4 +214,10 @@ class Template {
             <span style="width: 36px; display: inline-block">' . $downButton . '</span>';
         return $xhtml;
     }
+
+    public static function currencyFormat($number, $suffix = 'đ') {
+        if (!empty($number)) {
+            return number_format($number, 0, ',', ',') . "{$suffix}";
+        }
+    }
 }
