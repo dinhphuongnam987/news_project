@@ -37,6 +37,10 @@
             'element' => Form::number('quantity', @$item['quantity'], ['min' => 0, 'class' => $formInputAttr['class']])
         ],
         [
+            'label' => Form::label('quantity_remaining', 'Quantity Remaining', $formLabelAttr),
+            'element' => Form::number('quantity_remaining', @$item['quantity_remaining'], ['min' => 0, 'class' => $formInputAttr['class']])
+        ],
+        [
             'label' => Form::label('status', 'Status', $formLabelAttr),
             'element' => Form::select('status', $statusValue, @$item['status'], $formInputAttr),
         ],

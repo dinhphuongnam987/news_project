@@ -14,6 +14,7 @@
                     <th class="column-title">Giá tiền gốc</th>
                     <th class="column-title">Giá tiền</th>
                     <th class="column-title">Số lượng</th>
+                    <th class="column-title">Số lượng còn lại</th>
                     <th class="column-title">Trạng thái</th>
                     <th class="column-title">Hành động</th>
                 </tr>
@@ -29,6 +30,7 @@
                             $description     = Hightlight::show($val['description'], $params['search'], 'description');
                             $thumb           = Template::showItemThumb($controllerName, $val['thumb'], $val['name']);
                             $quantity        = $val['quantity'];
+                            $qty_remaining   = $val['quantity_remaining'];
                             $status          = Template::showItemStatus($controllerName, $id, $val['status']); 
                             $code            = Hightlight::show($val['code'], $params['search'], 'code');
                             $original_price  = $val['original_price'];
@@ -49,6 +51,7 @@
                             <td>{!! $original_price !!}</td>
                             <td>{!! $price !!}</td>
                             <td>{!! $quantity !!}</td>
+                            <td>{!! $qty_remaining !!}</td>
                             <td>{!! $status !!}</td>
                             <td class="last">{!! $listBtnAction !!}</td>
                         </tr>

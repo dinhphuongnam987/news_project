@@ -45,6 +45,7 @@ class ProductRequest extends FormRequest
             'original_price' => $condOriginalPrice,
             'price'          => $condPrice,
             'quantity'       => 'required|numeric|min:0',
+            'quantity_remaining' => 'required|numeric|min:0',
             'status'         => 'required|bail|in:active,inactive',
             'thumb'          => 'bail|image'
         ];

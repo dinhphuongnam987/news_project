@@ -22,7 +22,7 @@ class ProductModel extends AdminModel
         $result = null;
 
         if ($options['task'] == "admin-list-items") {
-            $query = $this->select('id', 'name', 'thumb', 'code', 'quantity', 'status', 'price', 'original_price', 'description');
+            $query = $this->select('id', 'name', 'thumb', 'code', 'quantity', 'quantity_remaining', 'status', 'price', 'original_price', 'description');
 
             if ($params['filter']['status'] !== "all") {
                 $query->where('status', '=', $params['filter']['status']);
@@ -45,9 +45,9 @@ class ProductModel extends AdminModel
         }
 
         if ($options['task'] == 'news-list-items') {
-            $query = $this->select('id', 'name', 'thumb', 'code', 'quantity', 'status', 'price', 'original_price', 'description')
+            $query = $this->select('id', 'name', 'thumb', 'code', 'quantity', 'quantity_remaining', 'status', 'price', 'original_price', 'description')
                     ->where('status', 'active')
-                    ->where('quantity', '>', 0);
+                    ->where('quantity_remaining', '>', 0);
 
             $result =  $query->orderBy('id', 'desc')
             ->paginate($params['pagination']['totalItemsPerPage']);
@@ -90,7 +90,7 @@ class ProductModel extends AdminModel
         $result = null;
 
         if ($options['task'] == 'get-item') {
-            $result = self::select('id', 'name', 'thumb', 'code', 'quantity', 'status', 'price', 'original_price', 'description')->where('id', $params['id'])->first();
+            $result = self::select('id', 'name', 'thumb', 'code', 'quantity', 'quantity_remaining', 'status', 'price', 'original_price', 'description')->where('id', $params['id'])->first();
         }
 
         if ($options['task'] == 'get-thumb') {
@@ -166,7 +166,7 @@ class ProductModel extends AdminModel
                 $result = null;
                 $total = null;
                 foreach($cart as $key => $qty) {
-                    $result[$key] = $this->select('id', 'name', 'thumb', 'price', 'quantity as qty_remaining')->where('id', $key)->first()->toArray();
+                    $result[$key] = $this->select('id', 'name', 'thumb', 'price', 'quantity_remaining as qty_remaining')->where('id', $key)->first()->toArray();
                     $qty = ($qty < $result[$key]['qty_remaining']) ? $qty : $result[$key]['qty_remaining'];
                     $result[$key]['quantity'] = $qty;
                     $result[$key]['sub_total'] = $qty * $result[$key]['price'];
@@ -207,9 +207,9 @@ class ProductModel extends AdminModel
                     'product_id' => $detail['id'],
                     'quantity' => $detail['quantity']
                 ]);
-                $quantityCurrent = $this->select('quantity')->where('id', $detail['id'])->first()->toArray();
-                $quantityRemaining = $quantityCurrent['quantity'] - $detail['quantity'];
-                $this->where('id', $detail['id'])->update(['quantity' => $quantityRemaining]);
+                $quantityRemainingCurrent = $this->select('quantity_remaining')->where('id', $detail['id'])->first()->toArray();
+                $quantityRemaining = $quantityRemainingCurrent['quantity_remaining'] - $detail['quantity'];
+                $this->where('id', $detail['id'])->update(['quantity_remaining' => $quantityRemaining]);
             }
             if(!empty(request()->cookie('cart'))) {
                 Cookie::queue(Cookie::forget('cart'));

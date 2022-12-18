@@ -14,7 +14,7 @@
                     <img src="{{ asset('images/product/' . $item['thumb']) }}" alt="">
                     <span class="title">{{ $item['name']}}</span>
                     <p class="description">{!! $item['description'] !!}</p>
-                    <span class="quantity">Số lượng: {{ $item['quantity'] }}</span>
+                    <span class="quantity_remaining">Số lượng: {{ $item['quantity_remaining'] }}</span>
                     <span class="price">{{ $price }}</span>
                     <span class="original_price">{{ $original_price }}</span>
                     <button data-url="{{ route($controllerName .'/add-cart', ['id' => $item['id']]) }}" class="btn btn-warning add-cart">Thêm vào giỏ hàng</button>
