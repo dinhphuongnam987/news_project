@@ -12,6 +12,7 @@
                     <th class="column-title">Email</th>
                     <th class="column-title">Số điện thoại</th>
                     <th class="column-title">Mã hóa đơn</th>
+                    <th class="column-title">Tùy chọn</th>
                     <th class="column-title">Thời gian đặt</th>
                     <th class="column-title">Hạn thanh toán</th>
                     <th class="column-title">Trạng thái</th>
@@ -41,8 +42,15 @@
                             <td>{!! $email !!}</td>
                             <td>{!! $phone !!}</td>
                             <td>{!! $maHD !!}
-                                <a href="{{ route("$controllerName/bill-detail", ['MaHD' => $val['MaHD']]) }}" target="_blank">   Chi tiết
+                                <a href="{{ route("$controllerName/bill-detail", ['MaHD' => $val['MaHD']]) }}" target="_blank"
+                                    style="margin-left: 10px; color: rgb(2, 112, 255)">Chi tiết
                                 </a>
+                            </td>
+                            <td>
+                                <a href="{{ route("$controllerName/bill-detail", ['MaHD' => $val['MaHD'], 'pdf' => 'view']) }}" 
+                                    style="margin-right: 10px; color: rgb(2, 112, 255)" target="_blank">Xem PDF</a>
+                                <a href="{{ route("$controllerName/bill-detail", ['MaHD' => $val['MaHD'], 'pdf' => 'download']) }}" 
+                                    style="margin-right: 10px; color: rgb(2, 112, 255)" target="_blank">Tải PDF</a>
                             </td>
                             <td>{!! $timeOrder !!}</td>
                             <td>{!! $deadline_pay !!}</td>

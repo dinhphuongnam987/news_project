@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Http\Request;
 use App\Models\OrderModel as MainModel;
 use App\Models\SettingModel;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class OrderController extends AdminController
 {
@@ -67,6 +68,13 @@ class OrderController extends AdminController
 
         $billDetail = $this->model->getItem($params, ['task' => 'get-bill-detail']);
         $generalSetting = $this->settingModel->getItem($params, ['task' => 'get-item']);
+
+        $pdf = Pdf::loadView($this->pathViewController .'bill-detail.pdf.index', compact('billDetail', 'generalSetting'));
+        if($request->pdf == 'view') {
+            return $pdf->stream();
+        } else if($request->pdf == 'download') {
+            return $pdf->download($billDetail[0]['name']. '-'. $billDetail[0]['MaHD'] . '.pdf');
+        }
 
         return view($this->pathViewController .'bill-detail.index', compact('billDetail', 'generalSetting'));
     }
