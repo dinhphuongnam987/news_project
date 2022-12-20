@@ -18,7 +18,6 @@ class ProductModel extends AdminModel
 
     public function listItems($params = null, $options = null)
     {
-
         $result = null;
 
         if ($options['task'] == "admin-list-items") {
@@ -198,6 +197,17 @@ class ProductModel extends AdminModel
         }
 
         if($options['task'] == 'order') {
+            date_default_timezone_set('Asia/Ho_Chi_Minh');
+            $paymentTimeSetting = DB::table('setting')->select('value')->where('key_value', 'payment-time-setting')->first();
+            $paymentTimeSetting = json_decode($paymentTimeSetting->value);
+            $paymentTime = $paymentTimeSetting->payment_time;
+            $paymentTime = (int) $paymentTime;
+
+            $params['created_at'] = date('Y-m-d H:i:s');
+            $timeNow = date("Y-m-d H:i:s");
+            $timeEnd = strtotime($timeNow) + ($paymentTime * 60);
+            $deadline_payment = date("Y-m-d H:i:s", $timeEnd);
+            $params['deadline_payment'] = $deadline_payment;
             $params['MaHD'] = substr(md5(uniqid(mt_rand(), true)) , 0, 8);
             $cartDetail = $this->cart(null, ['task' => 'get-cart-detail']);
             DB::table('order')->insert($params);
