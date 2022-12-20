@@ -6,7 +6,7 @@ use App\Models\SettingModel;
 use App\Models\ContactModel as MainModel;
 use App\Http\Requests\ContactRequest as MainRequest;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\SendMail;
+use App\Mail\MailContact;
 
 
 class ContactController extends Controller
@@ -39,7 +39,7 @@ class ContactController extends Controller
         if($request->method() == 'POST') {
             $params = $request->all();
             $this->model->saveItem($params, ['task' => 'add-item']);
-            Mail::to($params['email'])->send(new SendMail);
+            Mail::to($params['email'])->send(new MailContact);
 
             return response()->json([
                 'status' => 200,
