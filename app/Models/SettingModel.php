@@ -47,6 +47,12 @@ class SettingModel extends AdminModel
             case 'update-social-setting':
                 $key_value = 'social-setting';
                 break;
+            case 'update-bank-setting':
+                $key_value = 'bank-setting';
+                break;
+            case 'update-payment-time-setting':
+                $key_value = 'payment-time-setting';
+                break;
         }
 
         $params['modified_by']   = "hailan";

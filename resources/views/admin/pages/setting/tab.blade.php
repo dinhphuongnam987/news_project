@@ -21,6 +21,20 @@
                 </button>
             </a>
         </div>
+        <div class="col-md-2 col-sm-2 col-xs-2">
+            <a href="{{ route($controllerName, ['key' => 'bank-setting']) }}" class="tab">
+                <button type="button" class="btn btn-info">
+                    Cấu hình bank
+                </button>
+            </a>
+        </div>
+        <div class="col-md-2 col-sm-2 col-xs-2">
+            <a href="{{ route($controllerName, ['key' => 'payment-time-setting']) }}" class="tab">
+                <button type="button" class="btn btn-warning">
+                    Cấu hình hạn thanh toán
+                </button>
+            </a>
+        </div>
     </div>
 </div>
 

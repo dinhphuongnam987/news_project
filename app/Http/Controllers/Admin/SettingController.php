@@ -33,6 +33,14 @@ class SettingController extends AdminController
                 $page = 'social';
                 $params['field_value'] = 'social-setting'; 
                 break;
+            case 'bank-setting':
+                $page = 'bank';
+                $params['field_value'] = 'bank-setting'; 
+                break;
+            case 'payment-time-setting':
+                $page = 'payment_time';
+                $params['field_value'] = 'payment-time-setting'; 
+                break;
         }
 
         $item = $this->model->getItem($params, ['task' => 'get-item']);
@@ -62,6 +70,18 @@ class SettingController extends AdminController
                 $task = 'update-social-setting';
                 $notify = 'Cập nhập cấu hình social thành công!';
                 $key = 'social-setting';
+            }
+
+            if(isset($params['btn-bank-setting'])) {
+                $task = 'update-bank-setting';
+                $notify = 'Cập nhập cấu hình ngân hàng thành công!';
+                $key = 'bank-setting';
+            }
+
+            if(isset($params['btn-payment-time-setting'])) {
+                $task = 'update-payment-time-setting';
+                $notify = 'Cập nhập cấu hình hạn thanh toán thành công!';
+                $key = 'payment-time-setting';
             }
 
             $this->model->saveItem($params, ['task' => $task]);

@@ -24,40 +24,51 @@ class SettingRequest extends FormRequest
      */
     public function rules()
     {
-        $condThumb      = 'bail|required';
-        $condHotline    = 'bail|required|digits:10';
-        $condMail       = 'bail|required|email';
-        $condAddress    = 'bail|required';
-        $condStartTime  = 'bail|required';
-        $condEndTime    = 'bail|required';
+        $condThumb      = '';
+        $condHotline    = '';
+        $condMail       = '';
+        $condAddress    = '';
+        $condStartTime  = '';
+        $condEndTime    = '';
         $condPassword   = '';
         $condEmailBcc   = '';
         $condYoutube    = '';
         $condFacebook   = '';
+        $condBankName   = '';
+        $condAccountNumber   = '';
+        $condPaymentTime   = '';
         
         $task = '';
+        if(isset($this->input()['btn-general-setting'])) $task = 'general-setting';
         if(isset($this->input()['btn-email-setting'])) $task = 'email-setting';
         if(isset($this->input()['btn-social-setting'])) $task = 'social-setting';
+        if(isset($this->input()['btn-bank-setting'])) $task = 'bank-setting';
+        if(isset($this->input()['btn-payment-time-setting'])) $task = 'payment-time';
         
         switch($task) {
+            case 'general-setting':
+                $condThumb      = 'bail|required';
+                $condHotline    = 'bail|required|digits:10';
+                $condMail       = 'bail|required|email';
+                $condAddress    = 'bail|required';
+                $condStartTime  = 'bail|required';
+                $condEndTime    = 'bail|required';
+                break;
             case 'email-setting':
-                $condThumb      = '';
-                $condHotline    = '';
-                $condAddress    = '';
-                $condStartTime  = '';
-                $condEndTime    = '';
+                $condMail       = 'bail|required|email';
                 $condPassword   = 'bail|required';
                 $condEmailBcc   = 'bail|required|email|different:email';
                 break;
             case 'social-setting':
-                $condThumb      = '';
-                $condHotline    = '';
-                $condMail       = '';
-                $condAddress    = '';
-                $condStartTime  = '';
-                $condEndTime    = '';
                 $condYoutube    = 'bail|required|url';
                 $condFacebook   = 'bail|required|url';
+                break;
+            case 'bank-setting':
+                $condBankName    = 'bail|required';
+                $condAccountNumber   = 'bail|required|numeric';
+                break;
+            case 'payment-time':
+                $condPaymentTime   = 'bail|required';
                 break;
             }
             
@@ -74,6 +85,9 @@ class SettingRequest extends FormRequest
             'email_bcc'  => $condEmailBcc,
             'youtube'    => $condYoutube,
             'facebook'   => $condFacebook,
+            'bank_name'  => $condBankName,
+            'account_number' => $condAccountNumber,
+            'payment_time' => $condPaymentTime,
         ];
     }
 
