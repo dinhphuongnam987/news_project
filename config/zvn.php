@@ -30,6 +30,9 @@ return [
             'block' => ['name' => 'Bị khóa', 'class' => 'btn-danger'],
             'contacted'    => ['name' => 'Đã liên lạc', 'class' => 'btn-success'],
             'uncontacted'  => ['name' => 'Chưa liên lạc', 'class' => 'btn-info'],
+            'pending_payment'  => ['name' => 'Đang chờ thanh toán', 'class' => 'btn-info'],
+            'unpaid'  => ['name' => 'Đơn hàng bị hủy (quá hạn thanh toán)', 'class' => 'btn-danger'],
+            'paid'  => ['name' => 'Đã thanh toán', 'class' => 'btn-success'],
             'default'      => ['name' => 'Chưa xác định', 'class' => 'btn-success'],
         ],
         'is_home'       => [
@@ -61,6 +64,11 @@ return [
             'admin'      => ['name'=> 'Quản trị hệ thống'],
             'member'      => ['name'=> 'Người dùng bình thường'],
         ],
+        'status_payment' => [
+            'pending_payment'  => ['name'=> 'Đang chờ thanh toán'],
+            'unpaid' => ['name'=> 'Đơn hàng bị hủy (quá hạn thanh toán)'],
+            'paid' => ['name'=> 'Đã thanh toán'],
+        ],
         'search'       => [
             'all'           => ['name'=> 'Search by All'],
             'id'            => ['name'=> 'Search by ID'],
@@ -72,6 +80,8 @@ return [
             'link'          => ['name'=> 'Search by Link'],
             'content'       => ['name'=> 'Search by Content'],
             'code'          => ['name'=> 'Search by Code'],
+            'phone'          => ['name'=> 'Search by Phone'],
+            'MaHD'          => ['name'=> 'Search by MaHD'],
             
         ],
         'button' => [
@@ -90,6 +100,7 @@ return [
             'rss'       => ['all', 'name', 'link'],
             'user'      => ['all', 'username', 'email', 'fullname'],
             'product'   => ['all', 'name', 'code'],
+            'order'     => ['all', 'name', 'email', 'phone', 'MaHD'],
         ],
         'button' => [
             'default'   => ['edit', 'delete'],
@@ -101,6 +112,7 @@ return [
             'menu'      => ['edit', 'delete'],
             'contact'   => ['delete'],
             'product'   => ['edit', 'delete'],
+            'order'   => ['edit', 'delete'],
         ]
     ]
     

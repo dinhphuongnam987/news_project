@@ -107,7 +107,11 @@ class Template {
        $link          = route($controllerName . '/' . $fieldName, [$fieldName => 'value_new', 'id' => $id]);
         
        $tmplDisplay = Config::get('zvn.template.' . $fieldName);
-       $xhtml = sprintf('<select name="select_change_attr" data-url="%s" class="form-control">', $link  );
+       if($fieldName === 'status_payment') {
+        $classDisable = ($displayValue === 'unpaid') ? 'disabled' : '';
+       }
+
+       $xhtml = sprintf('<select name="select_change_attr" data-url="%s" class="form-control" %s>', $link, $classDisable ?? '');
 
         foreach ($tmplDisplay as $key => $value) {
            $xhtmlSelected = '';

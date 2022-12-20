@@ -18,6 +18,7 @@
             <li><a href="{{ route('dashboard') }}"><i class="fa fa-home"></i> Dashboard</a></li>
             <li><a href="{{ route('user') }}"><i class="fa fa-user"></i> User</a></li>
             <li><a href="{{ route('product') }}"><i class="fa fa-shopping-bag"></i> Product</a></li>
+            <li><a href="{{ route('order') }}"><i class="fa fa-shopping-basket"></i></i> Order</a></li>
             <li><a href="{{ route('category') }}"><i class="fa fa fa-building-o"></i> Category</a></li>
             <li><a href="{{ route('article') }}"><i class="fa fa-newspaper-o"></i> Article</a></li>
             <li><a href="{{ route('menu') }}"><i class="fa fa-book"></i> Menu</a></li>
