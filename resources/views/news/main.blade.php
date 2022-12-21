@@ -5,6 +5,7 @@
 </head>
 <body>
 
+<div class="loader"></div>
 <div class="super_container">
 	@include('news.elements.header')
 	@yield('content')

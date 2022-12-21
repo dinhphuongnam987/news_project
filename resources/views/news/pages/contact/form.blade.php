@@ -9,15 +9,15 @@
     $elements = [
         [
             'label'   => Form::label('name', 'Họ Tên'),
-            'element' => Form::text('name', '', ['class' => 'form-control'])
+            'element' => Form::text('name', '', ['class' => 'form-control', 'id' => 'contact_name'])
         ],
         [
             'label'   => Form::label('email', 'Email'),
-            'element' => Form::text('email', '', ['class' => 'form-control'])
+            'element' => Form::text('email', '', ['class' => 'form-control', 'id' => 'contact_email'])
         ],
         [
             'label'   => Form::label('phone', 'Phone'),
-            'element' => Form::text('phone', '', ['class' => 'form-control'])
+            'element' => Form::text('phone', '', ['class' => 'form-control', 'id' => 'contact_phone'])
         ],
         [
             'label'   => Form::label('message', 'Lời nhắn'),

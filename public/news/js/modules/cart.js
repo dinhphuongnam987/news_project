@@ -94,6 +94,9 @@ $(document).ready(function () {
             'email':  $("input[name='email']").val(),
         }
         
+        $('.loader').css("display", "block");
+        $('body').css("opacity", 0.3)
+        
         $.ajax({
             url: url,
             type: 'POST',
@@ -107,6 +110,8 @@ $(document).ready(function () {
                     });
                     $("#errors").html('')
                     localStorage.setItem('infoOrder', JSON.stringify(response.data))
+                    $('.loader').css("display", "none")
+                    $('body').css("opacity", 1)
                     window.location.href = $('#url_thank_you').val()
                 }
             },
@@ -114,6 +119,8 @@ $(document).ready(function () {
                 $.each(response.responseJSON.errors, function (key, item) {
                     $("#errors").html('')
                     $("#errors").append("<li class='alert alert-danger'>"+item+"</li>")
+                    $('.loader').css("display", "none")
+                    $('body').css("opacity", 1)
                 });
             }
         });
@@ -123,8 +130,8 @@ $(document).ready(function () {
     
     if(localStorage.getItem('infoOrder') !== null) {
         let info = JSON.parse(localStorage.getItem('infoOrder'))
-        $("input[name='name']").val(info.name)
-        $("input[name='phone']").val(info.phone)
-        $("input[name='email']").val(info.email)
+        $("#order_name").val(info.name)
+        $("#order_phone").val(info.phone)
+        $("#order_email").val(info.email)
     }
 });

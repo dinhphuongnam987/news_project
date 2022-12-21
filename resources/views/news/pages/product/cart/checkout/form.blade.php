@@ -10,15 +10,15 @@
     $elements = [
         [
             'label'   => Form::label('name', 'Họ & Tên'),
-            'element' => Form::text('name', '', ['class' => 'form-control'])
+            'element' => Form::text('name', '', ['class' => 'form-control', 'id' => 'order_name']),
         ],
         [
             'label'   => Form::label('email', 'Email'),
-            'element' => Form::text('email', '', ['class' => 'form-control'])
+            'element' => Form::text('email', '', ['class' => 'form-control', 'id' => 'order_email'])
         ],
         [
             'label'   => Form::label('phone', 'Số điện thoại'),
-            'element' => Form::text('phone', '', ['class' => 'form-control'])
+            'element' => Form::text('phone', '', ['class' => 'form-control', 'id' => 'order_phone'])
         ],
         [
             'element' => $token. $urlThankYou. Form::submit('Đặt Hàng', ['id' => 'btn-order', 'class'=>'btn btn-success', 'data-url' => route("$controllerName/order")]),

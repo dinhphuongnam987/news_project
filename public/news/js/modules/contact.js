@@ -11,6 +11,8 @@ $('#btn-contact').click(function(e) {
         'message':  $("textarea[name='message']").val(),
     }
 
+    $('.loader').css("display", "block");
+    $('body').css("opacity", 0.3);
     $.ajax({
         url: url,
         type: 'POST',
@@ -25,12 +27,16 @@ $('#btn-contact').click(function(e) {
                 $("#errors").html('')
                 $("textarea[name='message']").val('')
                 localStorage.setItem('infoContact', JSON.stringify(response.data))
+                $('.loader').css("display", "none")
+                $('body').css("opacity", 1)
             }
         },
         error: function(response) {
             $.each(response.responseJSON.errors, function (key, item) {
                 $("#errors").html('')
                 $("#errors").append("<li class='alert alert-danger'>"+item+"</li>")
+                $('.loader').css("display", "none")
+                $('body').css("opacity", 1)
             });
         }
     });
@@ -40,8 +46,8 @@ $('#btn-contact').click(function(e) {
 
 if(localStorage.getItem('infoContact') !== null) {
     let info = JSON.parse(localStorage.getItem('infoContact'))
-    $("input[name='name']").val(info.name)
-    $("input[name='phone']").val(info.phone)
-    $("input[name='email']").val(info.email)
+    $("#contact_name").val(info.name)
+    $("#contact_phone").val(info.phone)
+    $("#contact_email").val(info.email)
 }
 
