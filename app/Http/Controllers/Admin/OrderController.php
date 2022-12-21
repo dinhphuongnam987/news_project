@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use App\Models\OrderModel as MainModel;
 use App\Models\SettingModel;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
+use App\Mail\OrderSuccess;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends AdminController
 {
@@ -53,8 +57,28 @@ class OrderController extends AdminController
     {
         $params["currentstatusPayment"]   = $request->status_payment;
         $params["id"]                     = $request->id;
+        $params['field'] = 'key_value';
+        $params['field_value'] = 'general-setting';
 
         $this->model->saveItem($params, ['task' => 'change-status-payment']);
+        $generalSetting = $this->settingModel->getItem($params, ['task' => 'get-item']);
+        $order = $this->model->getItem($params, ['task' => 'get-item']);
+
+        $params['MaHD'] =  $order['MaHD'];
+        $billDetail = $this->model->getItem($params, ['task' => 'get-bill-detail']);
+
+        if(!empty($billDetail) && $request->status_payment == 'paid') {
+            $pdf = Pdf::loadView($this->pathViewController .'bill-detail.pdf.index', compact('billDetail', 'generalSetting'));
+            $pdf_name = Str::slug($billDetail[0]['name']. '-'. $billDetail[0]['MaHD']) . '.pdf';
+            $path = public_path('pdf');
+            $pdf_path = $path .'/' .$pdf_name;
+            if(!File::exists($path)) {
+                File::makeDirectory($path, $mode = 0755, true, true);
+            }
+            $pdf->save($pdf_path);
+            Mail::to($order['email'])->send(new OrderSuccess($order['MaHD'], $pdf_path));
+            unlink($pdf_path);
+        }
         return response()->json([
             'status' => 'success'
         ]);

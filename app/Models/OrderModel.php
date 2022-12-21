@@ -79,7 +79,7 @@ class OrderModel extends AdminModel
         $result = null;
 
         if ($options['task'] == 'get-item') {
-            $result = self::select('id', 'name', 'email', 'phone')->where('id', $params['id'])->first();
+            $result = self::select('id', 'name', 'email', 'phone', 'MaHD')->where('id', $params['id'])->first()->toArray();
         }
 
         if ($options['task'] == 'get-bill-detail') {
@@ -137,9 +137,6 @@ class OrderModel extends AdminModel
         foreach($result as $val) {
             if($params['currentstatusPayment'] == 'unpaid') {
                 $qty_remaining = $val['quantity_remaining'] + $val['qty_order'];
-                DB::table('product')->where('id', $val['id'])->update(['quantity_remaining' => $qty_remaining]);
-            } else {
-                $qty_remaining = $val['qty_product'] - $val['qty_order'];
                 DB::table('product')->where('id', $val['id'])->update(['quantity_remaining' => $qty_remaining]);
             }
         }
