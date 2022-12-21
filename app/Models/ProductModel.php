@@ -208,7 +208,8 @@ class ProductModel extends AdminModel
             $timeEnd = strtotime($timeNow) + ($paymentTime * 60);
             $deadline_payment = date("Y-m-d H:i:s", $timeEnd);
             $params['deadline_payment'] = $deadline_payment;
-            $params['MaHD'] = substr(md5(uniqid(mt_rand(), true)) , 0, 8);
+            
+            $total = null;
             $cartDetail = $this->cart(null, ['task' => 'get-cart-detail']);
             DB::table('order')->insert($params);
             foreach($cartDetail as $detail) {
@@ -217,12 +218,18 @@ class ProductModel extends AdminModel
                     'product_id' => $detail['id'],
                     'quantity' => $detail['quantity']
                 ]);
+                $total = $detail['total'];
                 $quantityRemainingCurrent = $this->select('quantity_remaining')->where('id', $detail['id'])->first()->toArray();
                 $quantityRemaining = $quantityRemainingCurrent['quantity_remaining'] - $detail['quantity'];
                 $this->where('id', $detail['id'])->update(['quantity_remaining' => $quantityRemaining]);
             }
             if(!empty(request()->cookie('cart'))) {
                 Cookie::queue(Cookie::forget('cart'));
+                $result = [
+                    'deadline_payment' => $deadline_payment,
+                    'total'      => $total,
+                ];
+                return $result;
             }
         }
     }

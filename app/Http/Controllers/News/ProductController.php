@@ -3,19 +3,25 @@
 namespace App\Http\Controllers\News;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Mail\OrderConfirm;
 use App\Http\Requests\OrderRequest as MainRequest;
 
 use App\Models\ProductModel;
+use App\Models\SettingModel;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class ProductController extends Controller
 {
     private $pathViewController = 'news.pages.product.';
     private $controllerName     = 'product';
     private $model;
+    private $settingModel;
     private $title              = 'Săn Voucher';
     public function __construct()
     {
         $this->model = new ProductModel();
+        $this->settingModel = new SettingModel();
         view()->share('controllerName', $this->controllerName);
     }
 
@@ -72,9 +78,19 @@ class ProductController extends Controller
         $params['name'] = $request->name;
         $params['phone'] = $request->phone;
         $params['email'] = $request->email;
-
-        $this->model->cart($params, ['task' => 'order']);
+        $params['MaHD'] = substr(md5(uniqid(mt_rand(), true)) , 0, 8);
+        $result = $this->model->cart($params, ['task' => 'order']);
         
+        if(!empty($result)) {
+            $bank_setting = $this->settingModel->getItem(['field' => 'key_value', 'field_value' => 'bank-setting'], ['task' => 'get-item']);
+            $order = [
+                'MaHD'  => $params['MaHD'],
+                'total' => $result['total'],
+                'deadline_payment' => $result['deadline_payment']
+            ];
+            Mail::to($request->email)->send(new OrderConfirm($order, $bank_setting));
+        }
+
         return response()->json([
             'status' => 200,
             'data'   => $params
