@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Models\AdminModel;
 use Illuminate\Support\Facades\DB;
+use App\Mail\OrderCanceled;
+use Illuminate\Support\Facades\Mail;
 
 class OrderModel extends AdminModel
 {
@@ -94,7 +96,7 @@ class OrderModel extends AdminModel
 
     public function updateStatusDeadlinePayment() {
         date_default_timezone_set('Asia/Ho_Chi_Minh');
-        $orders = $this->select('id', 'status', 'deadline_payment')->get()->toArray();
+        $orders = $this->select('id', 'status', 'deadline_payment', 'email', 'MaHD')->get()->toArray();
         foreach($orders as $val) {
             $currentStatus = $val['status'];
             if($currentStatus == 'pending_payment')  {
@@ -105,6 +107,7 @@ class OrderModel extends AdminModel
                         ['id' => $val['id'], 'currentstatusPayment' => 'unpaid'], 
                         ['task' => 'change-status-payment']
                     );
+                    Mail::to($val['email'])->send(new OrderCanceled($val['MaHD']));
                 }
             }
         }
