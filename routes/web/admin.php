@@ -93,6 +93,7 @@ Route::group(['prefix' => $prefixAdmin, 'namespace' => 'Admin', 'middleware' => 
         Route::get('delete/{id}',                       ['as' => $controllerName . '/delete',      'uses' => $controller . 'delete'])->where('id', '[0-9]+');
         Route::get('change-status-{status_payment}/{id}',       ['as' => $controllerName . '/status_payment',      'uses' => $controller . 'statusPayment']);
         Route::get('bill-detail-{MaHD}',       ['as' => $controllerName . '/bill-detail',      'uses' => $controller . 'billDetail']);
+        Route::get('export',       ['as' => $controllerName . '/export',      'uses' => $controller . 'export']);
     });
 
     // ============================== USER ==============================

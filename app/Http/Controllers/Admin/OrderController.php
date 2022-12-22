@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use App\Mail\OrderSuccess;
 use Illuminate\Support\Facades\Mail;
+use App\Exports\OrderExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class OrderController extends AdminController
 {
@@ -112,5 +114,10 @@ class OrderController extends AdminController
             $notify = 'Xóa phần tử thành công!';
         }
         return redirect()->route($this->controllerName)->with('zvn_notify', $notify);
+    }
+
+    public function export() 
+    {
+        return Excel::download(new OrderExport, 'order.xlsx');
     }
 }
