@@ -63,11 +63,11 @@
                 @endif
             </tbody>
         </table>
-        <button class="btn btn-warning" style="float: right; margin-right: 30px">
-            <a href="{{ route($controllerName . '/export') }}" target="_blank" style="color: white">
+        <a href="{{ route($controllerName . '/export') }}" target="_blank" style="color: white">
+            <button class="btn btn-warning" style="float: right; margin-right: 30px">
                 Xuất danh sách đơn hàng(Excel)
-            </a>
-        </button>
+            </button>
+        </a>
     </div>
 </div>
            
