@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\ProductModel as MainModel;
 use App\Models\CategoryModel;
 use App\Http\Requests\ProductRequest as MainRequest;
+use App\Imports\ProductImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends AdminController
 {
@@ -44,6 +46,19 @@ class ProductController extends AdminController
             }
             $this->model->saveItem($params, ['task' => $task]);
             return redirect()->route($this->controllerName)->with("zvn_notify", $notify);
+        }
+    }
+
+    public function import(Request $request) {
+        if (empty($request->file('excel_file'))) 
+        {
+            request()->validate([
+                'excel_file'  => 'required|mimes:xls,xlsx,csv|max:2048',
+            ]);
+        } else {
+            Excel::import(new ProductImport, $request->file('excel_file'));
+
+            return back()->with('zvn_notify', 'Nhập thành công!');
         }
     }
 }

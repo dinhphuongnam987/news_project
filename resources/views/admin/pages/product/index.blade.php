@@ -11,8 +11,9 @@
 
 @section('content')
     
-    @include ('admin.templates.page_header', ['pageIndex' => true])
+    @include ('admin.templates.page_header', ['pageIndex' => true, 'pageImport' => true, 'urlImport' => route("$controllerName/import")])
     @include ('admin.templates.zvn_notify')
+    @include ('admin.templates.error')
 
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">

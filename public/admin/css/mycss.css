@@ -85,3 +85,11 @@ span.highlight{
 .tab.tab-active > button{
     background-color: rgb(59, 59, 59);
 }
+
+#import::-webkit-file-upload-button {
+    background: rgb(243, 99, 16);
+    color: white;
+    padding: 7px;
+    width: 100px;
+    border-radius: 10px;
+}
