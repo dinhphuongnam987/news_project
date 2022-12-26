@@ -9,8 +9,7 @@ use App\Models\SettingModel;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
-use App\Mail\OrderSuccess;
-use Illuminate\Support\Facades\Mail;
+use App\Jobs\OrderSuccessMail;
 use App\Exports\OrderExport;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -78,8 +77,7 @@ class OrderController extends AdminController
                 File::makeDirectory($path, $mode = 0755, true, true);
             }
             $pdf->save($pdf_path);
-            Mail::to($order['email'])->send(new OrderSuccess($order['MaHD'], $pdf_path));
-            unlink($pdf_path);
+            OrderSuccessMail::dispatch($order, $pdf_path)->onQueue('order-success-email');
         }
         return response()->json([
             'status' => 'success'

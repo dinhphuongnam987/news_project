@@ -88,7 +88,8 @@ class ProductController extends Controller
                 'total' => $result['total'],
                 'deadline_payment' => $result['deadline_payment']
             ];
-            Mail::to($request->email)->send(new OrderConfirm($order, $bank_setting));
+            $message = (new OrderConfirm($order, $bank_setting))->onQueue('order-confirm-email');
+            Mail::to($request->email)->queue($message);
         }
 
         return response()->json([

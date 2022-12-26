@@ -39,8 +39,8 @@ class ContactController extends Controller
         if($request->method() == 'POST') {
             $params = $request->all();
             $this->model->saveItem($params, ['task' => 'add-item']);
-            Mail::to($params['email'])->send(new MailContact);
-
+            $message = (new MailContact)->onQueue('contact-email');
+            Mail::to($params['email'])->queue($message);
             return response()->json([
                 'status' => 200,
                 'data'   => $params

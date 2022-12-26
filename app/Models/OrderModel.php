@@ -107,7 +107,8 @@ class OrderModel extends AdminModel
                         ['id' => $val['id'], 'currentstatusPayment' => 'unpaid'], 
                         ['task' => 'change-status-payment']
                     );
-                    Mail::to($val['email'])->send(new OrderCanceled($val['MaHD']));
+                    $message = (new OrderCanceled($val['MaHD']))->onQueue('order-canceled-email');
+                    Mail::to($val['email'])->queue($message);
                 }
             }
         }
