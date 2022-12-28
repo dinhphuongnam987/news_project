@@ -61,6 +61,7 @@ return [
             'new_window'     => ['name'=> 'Cửa sổ mới', 'class' => '_blank'],
         ],
         'level'       => [
+            'founder'      => ['name'=> 'Người sáng lập'],
             'admin'      => ['name'=> 'Quản trị hệ thống'],
             'member'      => ['name'=> 'Người dùng bình thường'],
         ],

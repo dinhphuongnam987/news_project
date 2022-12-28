@@ -1,3 +1,10 @@
+@php
+$founderLevel = null;
+if(session()->has('userInfo'))  {
+    $userInfo = session()->get('userInfo');
+    if($userInfo['level'] == 'founder') $founderLevel = true; 
+}
+@endphp
 <!-- menu profile quick info -->
 <div class="profile clearfix">
     <div class="profile_pic">
@@ -16,7 +23,9 @@
         <h3>Menu</h3>
         <ul class="nav side-menu">
             <li><a href="{{ route('dashboard') }}"><i class="fa fa-home"></i> Dashboard</a></li>
+            @if($founderLevel)
             <li><a href="{{ route('user') }}"><i class="fa fa-user"></i> User</a></li>
+            @endif
             <li><a href="{{ route('product') }}"><i class="fa fa-shopping-bag"></i> Product</a></li>
             <li><a href="{{ route('order') }}"><i class="fa fa-shopping-basket"></i></i> Order</a></li>
             <li><a href="{{ route('category') }}"><i class="fa fa fa-building-o"></i> Category</a></li>

@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class PermissionAdmin
+class PermissionFounder
 {
     /**
      * Handle an incoming request.
@@ -21,7 +21,7 @@ class PermissionAdmin
         if($request->session()->has('userInfo'))  {
             $userInfo = $request->session()->get('userInfo');
 
-            if ($userInfo['level'] == 'founder' || $userInfo['level'] == 'admin')  return $next($request);
+            if ($userInfo['level'] == 'founder')  return $next($request);
             return redirect()->route('notify/noPermission');
         }
 

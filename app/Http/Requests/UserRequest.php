@@ -46,7 +46,7 @@ class UserRequest extends FormRequest
                 $condFullname   = 'bail|required|min: 5';
                 $condPass       = 'bail|required|between:5,100|confirmed';
                 $condStatus     = 'bail|in:active,inactive';
-                $condLevel      = 'bail|in:admin,member';
+                $condLevel      = 'bail|in:founder,admin,member';
                 $condAvatar     = 'bail|required|image|max:500';
                 break;
             case 'edit-info':
@@ -60,7 +60,7 @@ class UserRequest extends FormRequest
                 $condPass = 'bail|required|between:5,100|confirmed';
                 break;
             case 'change-level':
-                $condLevel = 'bail|in:admin,member';
+                $condLevel = 'bail|in:founder,admin,member';
                 break;
             default:
                 break;

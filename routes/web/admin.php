@@ -100,7 +100,7 @@ Route::group(['prefix' => $prefixAdmin, 'namespace' => 'Admin', 'middleware' => 
     // ============================== USER ==============================
     $prefix         = 'user';
     $controllerName = 'user';
-    Route::group(['prefix' =>  $prefix], function () use ($controllerName) {
+    Route::group(['prefix' =>  $prefix, 'middleware' => 'permission.founder'], function () use ($controllerName) {
         $controller = ucfirst($controllerName)  . 'Controller@';
         Route::get('/',                                 ['as' => $controllerName,                  'uses' => $controller . 'index']);
         Route::get('form/{id?}',                        ['as' => $controllerName . '/form',        'uses' => $controller . 'form'])->where('id', '[0-9]+');

@@ -66,5 +66,6 @@ class Kernel extends HttpKernel
         'permission.admin' => \App\Http\Middleware\PermissionAdmin::class,
         'minify' => \App\Http\Middleware\OptimizeMiddleware::class,
         'check.cart' => \App\Http\Middleware\CheckCart::class,
+        'permission.founder' => \App\Http\Middleware\PermissionFounder::class,
     ];
 }
