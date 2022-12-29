@@ -5,16 +5,35 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Http\Request;
 use App\Models\UserModel as MainModel;
+use App\Models\UserGroupModel;
 use App\Http\Requests\UserRequest as MainRequest;
 
 class UserController extends AdminController
 {
+    private $userGroupModel;
     public function __construct()
     {
         $this->pathViewController = 'admin.pages.user.';
         $this->controllerName     = 'user';
         $this->model = new MainModel();
+        $this->userGroupModel = new UserGroupModel();
         parent::__construct();
+    }
+
+    public function form(Request $request)
+    {
+        $item = null;
+        $groupUserItems = $this->userGroupModel->listItems(null, ['task' => 'admin-list-items']);
+
+        if ($request->id !== null) {
+            $params["id"] = $request->id;
+            $item = $this->model->getItem($params, ['task' => 'get-item']);
+        }
+
+        return view($this->pathViewController .  'form', [
+            'item'        => $item,
+            'groupUserItems' => $groupUserItems
+        ]);
     }
 
     public function save(MainRequest $request)
@@ -50,6 +69,14 @@ class UserController extends AdminController
             $this->model->saveItem($params, ['task' => 'change-password']);
             return redirect()->route($this->controllerName)->with("zvn_notify", "Thay đổi mật khẩu thành công!");
         }
+    }
+
+    public function changePermission(Request $request)
+    {
+        $params["currentPermission"]   = $request->permission;
+        $params["id"]               = $request->id;
+        $this->model->saveItem($params, ['task' => 'change-permission']);
+        return redirect()->route($this->controllerName)->with("zvn_notify", "Thay đổi quyền thành công!");
     }
 
     public function level(Request $request)

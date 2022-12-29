@@ -9,6 +9,9 @@
             @include('admin.pages.user.form_info')
             @include('admin.pages.user.form_change_password')
             @include('admin.pages.user.form_change_level')
+            @if(@$item['level'] !== 'founder')
+                @include('admin.pages.user.form_change_permission')
+            @endif
         </div>
     @else
         @include('admin.pages.user.form_add')

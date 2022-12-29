@@ -25,6 +25,7 @@ if(session()->has('userInfo'))  {
             <li><a href="{{ route('dashboard') }}"><i class="fa fa-home"></i> Dashboard</a></li>
             @if($founderLevel)
             <li><a href="{{ route('user') }}"><i class="fa fa-user"></i> User</a></li>
+            <li><a href="{{ route('userGroup') }}"><i class="fa fa-users"></i> User Group</a></li>
             @endif
             <li><a href="{{ route('product') }}"><i class="fa fa-shopping-bag"></i> Product</a></li>
             <li><a href="{{ route('order') }}"><i class="fa fa-shopping-basket"></i></i> Order</a></li>

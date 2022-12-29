@@ -30,6 +30,7 @@
 
 @extends('admin.main')
 @section('content')
+    @include ('admin.templates.zvn_notify')
     <div class="page-header zvn-page-header clearfix">
         <div class="zvn-page-header-title">
             <h3>Quản Lý Thống Kê</h3>

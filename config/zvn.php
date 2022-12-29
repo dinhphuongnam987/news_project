@@ -109,11 +109,12 @@ return [
             'category'  => ['edit', 'delete'],
             'article'   => ['edit', 'delete'],
             'rss'   => ['edit', 'delete'],
-            'user'      => ['edit'],
+            'user'      => ['edit', 'delete'],
             'menu'      => ['edit', 'delete'],
             'contact'   => ['delete'],
             'product'   => ['edit', 'delete'],
             'order'   => ['edit', 'delete'],
+            'userGroup'   => ['edit', 'delete'],
         ]
     ]
     
