@@ -32,6 +32,15 @@ class PermissionAdmin
                     $permissionItem = DB::table('permission')->select('id')->where('route_name', $routeCurrent)->first(); // {id: 1}
 
                     if(!empty($permissionItem)) {
+                        $permission_deny = DB::table('user')->select('permission_deny')->where('id', $userInfo['id'])->first();
+                        // permission_deny = ["3"]
+                        if($permission_deny !== null) {
+                            $permission_deny = json_decode($permission_deny->permission_deny); // [0 => 3]
+                            foreach($permission_deny as $val) {
+                                unset($permission_ids[$val]); // permission_ids = [1,2]
+                            }
+                        }
+
                         if(array_key_exists($permissionItem->id, $permission_ids)) { // permissionItem->id : 1
                             return $next($request);
                         }

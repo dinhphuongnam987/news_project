@@ -81,7 +81,7 @@ class UserModel extends AdminModel
         $result = null;
 
         if ($options['task'] == 'get-item') {
-            $result = self::select('id', 'username', 'email', 'status', 'fullname', 'level', 'avatar', 'password', 'group_id')->where('id', $params['id'])->first();
+            $result = self::select('id', 'username', 'email', 'status', 'fullname', 'level', 'avatar', 'password', 'group_id', 'permission_deny')->where('id', $params['id'])->first();
         }
 
         if ($options['task'] == 'get-avatar') {
@@ -89,7 +89,7 @@ class UserModel extends AdminModel
         }
 
         if ($options['task'] == 'auth-login') {
-            $result = self::select('id', 'username', 'fullname', 'email', 'level', 'avatar', 'group_id')
+            $result = self::select('id', 'username', 'fullname', 'email', 'level', 'avatar', 'group_id', 'permission_deny')
                 ->where('status', 'active')
                 ->where('email', $params['email'])
                 ->where('password', md5($params['password']))->first();
@@ -143,6 +143,11 @@ class UserModel extends AdminModel
         if ($options['task'] == 'change-permission') {
             $permission       = ($params['currentPermission'] == 'default') ? null : $params['currentPermission'];
             self::where('id', $params['id'])->update(['group_id' => $permission]);
+        }
+
+        if ($options['task'] == 'change-permission-deny') {
+            $permission_deny       = ($params['permission_deny'] == 'default') ? null : $params['permission_deny'];
+            self::where('id', $params['id'])->update(['permission_deny' => $permission_deny]);
         }
     }
 

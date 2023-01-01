@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\UserModel as MainModel;
 use App\Models\UserGroupModel;
 use App\Http\Requests\UserRequest as MainRequest;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends AdminController
 {
@@ -24,6 +25,7 @@ class UserController extends AdminController
     {
         $item = null;
         $groupUserItems = $this->userGroupModel->listItems(null, ['task' => 'admin-list-items']);
+        $permissions  = DB::table('permission')->select('*')->get()->toArray();
 
         if ($request->id !== null) {
             $params["id"] = $request->id;
@@ -32,7 +34,8 @@ class UserController extends AdminController
 
         return view($this->pathViewController .  'form', [
             'item'        => $item,
-            'groupUserItems' => $groupUserItems
+            'groupUserItems' => $groupUserItems,
+            'permissions'   => $permissions,
         ]);
     }
 
@@ -76,6 +79,16 @@ class UserController extends AdminController
         $params["currentPermission"]   = $request->permission;
         $params["id"]               = $request->id;
         $this->model->saveItem($params, ['task' => 'change-permission']);
+        return redirect()->route($this->controllerName)->with("zvn_notify", "Thay đổi quyền thành công!");
+    }
+
+    public function changePermissionDeny(Request $request)
+    {
+        $params = $request->all();
+        if(isset($params['permission_deny'])) {
+            $params['permission_deny'] = json_encode($params['permission_deny']);
+        }
+        $this->model->saveItem($params, ['task' => 'change-permission-deny']);
         return redirect()->route($this->controllerName)->with("zvn_notify", "Thay đổi quyền thành công!");
     }
 
