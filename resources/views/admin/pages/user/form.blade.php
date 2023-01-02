@@ -13,6 +13,7 @@
                 @include('admin.pages.user.form_change_permission')
                 @if(!empty(@$item['group_id']))
                     @include('admin.pages.user.form_change_permission_deny')
+                    @include('admin.pages.user.form_change_permission_allow')
                 @endif
             @endif
         </div>

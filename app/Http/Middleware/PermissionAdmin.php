@@ -41,6 +41,14 @@ class PermissionAdmin
                             }
                         }
 
+                        if($userInfo['permission_allow'] !== null) {
+                            // $userInfo['permission_allow'] = ["4"]
+                            $permission_allow = json_decode($userInfo['permission_allow']); // [0 => 4]
+                            foreach($permission_allow as $val) {
+                                $permission_ids[$val] = $val; // permission_ids = [1,2,4]
+                            }
+                        }
+
                         if(array_key_exists($permissionItem->id, $permission_ids)) { // permissionItem->id : 1
                             return $next($request);
                         }

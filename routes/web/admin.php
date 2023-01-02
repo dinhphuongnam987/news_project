@@ -109,6 +109,7 @@ Route::group(['prefix' => $prefixAdmin, 'namespace' => 'Admin', 'middleware' => 
         Route::post('change-level',                     ['as' => $controllerName . '/change-level',        'uses' => $controller . 'changeLevel']);
         Route::post('change-permission',                 ['as' => $controllerName . '/change-permission',      'uses' => $controller . 'changePermission']);
         Route::post('change-permission-deny',           ['as' => $controllerName . '/change-permission-deny',      'uses' => $controller . 'changePermissionDeny']);
+        Route::post('change-permission-allow',          ['as' => $controllerName . '/change-permission-allow',      'uses' => $controller . 'changePermissionAllow']);
         Route::get('delete/{id}',                       ['as' => $controllerName . '/delete',      'uses' => $controller . 'delete'])->where('id', '[0-9]+');
         Route::get('change-status-{status}/{id}',       ['as' => $controllerName . '/status',      'uses' => $controller . 'status']);
         Route::get('change-level-{level}/{id}',         ['as' => $controllerName . '/level',      'uses' => $controller . 'level']);

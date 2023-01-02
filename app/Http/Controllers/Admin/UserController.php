@@ -92,6 +92,18 @@ class UserController extends AdminController
         return redirect()->route($this->controllerName)->with("zvn_notify", "Thay đổi quyền thành công!");
     }
 
+    public function changePermissionAllow(Request $request)
+    {
+        $params = $request->all();
+        if(isset($params['permission_allow'])) {
+            $params['permission_allow'] = json_encode($params['permission_allow']);
+        } else {
+            $params['permission_allow'] = null;
+        }
+        $this->model->saveItem($params, ['task' => 'change-permission-allow']);
+        return redirect()->route($this->controllerName)->with("zvn_notify", "Thay đổi quyền thành công!");
+    }
+
     public function level(Request $request)
     {
         $params["currentLevel"]   = $request->level;
