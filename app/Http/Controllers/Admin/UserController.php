@@ -87,6 +87,8 @@ class UserController extends AdminController
         $params = $request->all();
         if(isset($params['permission_deny'])) {
             $params['permission_deny'] = json_encode($params['permission_deny']);
+        } else {
+            $params['permission_deny'] = null;
         }
         $this->model->saveItem($params, ['task' => 'change-permission-deny']);
         return redirect()->route($this->controllerName)->with("zvn_notify", "Thay đổi quyền thành công!");

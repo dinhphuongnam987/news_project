@@ -146,8 +146,7 @@ class UserModel extends AdminModel
         }
 
         if ($options['task'] == 'change-permission-deny') {
-            $permission_deny       = ($params['permission_deny'] == 'default') ? null : $params['permission_deny'];
-            self::where('id', $params['id'])->update(['permission_deny' => $permission_deny]);
+            self::where('id', $params['id'])->update(['permission_deny' => $params['permission_deny']]);
         }
 
         if ($options['task'] == 'change-permission-allow') {
