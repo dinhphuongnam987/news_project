@@ -102,13 +102,13 @@ class RssModel extends AdminModel
         }
 
         if($options['task'] == 'add-item') {
-            $params['created_by'] = "hailan";
+            $params['created_by'] = "phuongnam";
             $params['created']    = date('Y-m-d');
             self::insert($this->prepareParams($params));        
         }
 
         if($options['task'] == 'edit-item') {
-            $params['modified_by']   = "hailan";
+            $params['modified_by']   = "phuongnam";
             $params['modified']      = date('Y-m-d');
             self::where('id', $params['id'])->update($this->prepareParams($params));
         }

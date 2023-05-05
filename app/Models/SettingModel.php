@@ -55,7 +55,7 @@ class SettingModel extends AdminModel
                 break;
         }
 
-        $params['modified_by']   = "hailan";
+        $params['modified_by']   = "phuongnam";
         $params['modified']      = date('Y-m-d');
         $params = json_encode($this->prepareParams($params));
         self::where('key_value', $key_value)->update(['value' => $params]);

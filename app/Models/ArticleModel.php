@@ -194,7 +194,7 @@ class ArticleModel extends AdminModel
 
 
         if ($options['task'] == 'add-item') {
-            $params['created_by'] = "hailan";
+            $params['created_by'] = "phuongnam";
             $params['created']    = date('Y-m-d');
             $params['thumb']      = $this->uploadThumb($params['thumb']);
             self::insert($this->prepareParams($params));
@@ -209,7 +209,7 @@ class ArticleModel extends AdminModel
                 $params['thumb']      = $this->uploadThumb($params['thumb']);
             }
 
-            $params['modified_by']   = "hailan";
+            $params['modified_by']   = "phuongnam";
             $params['modified']      = date('Y-m-d');
 
             self::where(['id' => $params['id']])->update($this->prepareParams($params));

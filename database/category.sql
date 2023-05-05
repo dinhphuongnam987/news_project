@@ -47,14 +47,14 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`id`, `name`, `status`, `created`, `created_by`, `modified`, `modified_by`, `is_home`, `display`, `parent_id`, `_lft`, `_rgt`) VALUES
-(2, 'Thể thao', 'active', '2022-11-27 08:26:05', 'admin', '2019-05-12 00:00:00', 'hailan', 'yes', 'list', 1, 4, 5),
-(3, 'Giáo dục', 'active', '2022-11-27 08:26:14', 'admin', '2019-05-12 00:00:00', 'hailan', 'yes', 'grid', 1, 3, 6),
-(4, 'Sức khỏe', 'active', '2019-05-04 00:00:00', 'admin', '2019-05-15 15:04:33', 'hailan', 'yes', 'list', 1, 8, 9),
-(5, 'Du lịch', 'active', '2022-11-27 08:25:20', 'admin', '2019-05-15 15:04:30', 'hailan', 'yes', 'grid', 1, 2, 7),
-(6, 'Khoa học', 'active', '2019-05-04 00:00:00', 'admin', '2019-05-12 00:00:00', 'hailan', 'yes', 'list', 1, 10, 11),
-(7, 'Số hóa', 'active', '2019-05-04 00:00:00', 'admin', '2019-05-15 15:04:38', 'hailan', 'yes', 'grid', 1, 12, 13),
-(8, 'Xe - Ô tô', 'active', '2019-05-04 00:00:00', 'admin', '2019-05-15 15:04:36', 'hailan', 'yes', 'grid', 1, 14, 15),
-(9, 'Kinh doanh', 'active', '2019-05-12 00:00:00', 'hailan', NULL, NULL, 'yes', 'grid', 1, 16, 17),
+(2, 'Thể thao', 'active', '2022-11-27 08:26:05', 'admin', '2019-05-12 00:00:00', 'phuongnam', 'yes', 'list', 1, 4, 5),
+(3, 'Giáo dục', 'active', '2022-11-27 08:26:14', 'admin', '2019-05-12 00:00:00', 'phuongnam', 'yes', 'grid', 1, 3, 6),
+(4, 'Sức khỏe', 'active', '2019-05-04 00:00:00', 'admin', '2019-05-15 15:04:33', 'phuongnam', 'yes', 'list', 1, 8, 9),
+(5, 'Du lịch', 'active', '2022-11-27 08:25:20', 'admin', '2019-05-15 15:04:30', 'phuongnam', 'yes', 'grid', 1, 2, 7),
+(6, 'Khoa học', 'active', '2019-05-04 00:00:00', 'admin', '2019-05-12 00:00:00', 'phuongnam', 'yes', 'list', 1, 10, 11),
+(7, 'Số hóa', 'active', '2019-05-04 00:00:00', 'admin', '2019-05-15 15:04:38', 'phuongnam', 'yes', 'grid', 1, 12, 13),
+(8, 'Xe - Ô tô', 'active', '2019-05-04 00:00:00', 'admin', '2019-05-15 15:04:36', 'phuongnam', 'yes', 'grid', 1, 14, 15),
+(9, 'Kinh doanh', 'active', '2019-05-12 00:00:00', 'phuongnam', NULL, NULL, 'yes', 'grid', 1, 16, 17),
 (1, 'Root', 'active', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 18);
 
 --

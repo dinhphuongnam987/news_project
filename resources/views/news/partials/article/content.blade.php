@@ -28,7 +28,7 @@
     <div class="post_info d-flex flex-row align-items-center justify-content-start">
         <div class="post_author d-flex flex-row align-items-center justify-content-start">
             <div><div class="post_author_image"><img src="{{asset('news/images/author_1.jpg') }}" alt=""></div></div>
-            <div class="post_author_name"><a href="#">hailan</a></div>
+            <div class="post_author_name"><a href="#">phuongnam</a></div>
         </div>
         <div class="post_date"><a href="#">{{ $created }}</a></div>
     </div>

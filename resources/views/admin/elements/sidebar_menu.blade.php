@@ -12,7 +12,7 @@ if(session()->has('userInfo'))  {
     </div>
     <div class="profile_info">
         <span>Welcome,</span>
-        <h2>luutruonghailan</h2>
+        <h2>dinhphuongnam</h2>
     </div>
 </div>
 <!-- /menu profile quick info -->
