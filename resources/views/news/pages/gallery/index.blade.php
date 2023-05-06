@@ -8,7 +8,7 @@
                 <div class="row">
                     @if($gallery)
                         @foreach($gallery as $item)
-                            <div class="col-md-3"><img src="{{ url('images/'. $item) }}" width="100%"></div>
+                            <div class="col-md-3 mb-4"><img src="{{ url('images/'. $item) }}" width="100%"></div>
                         @endforeach
                     @endif
                 </div>
