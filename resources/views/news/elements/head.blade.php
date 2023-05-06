@@ -17,3 +17,4 @@
 <link rel="stylesheet" type="text/css" href="{{asset('news/css/all-css.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('news/css/dropdown-menu.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('news/css/loader.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('news/css/my-style.css')}}">

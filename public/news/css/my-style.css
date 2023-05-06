@@ -185,6 +185,7 @@ ul.main_nav_list li.active a{
 
 .single_product .item {
     height: 200px;
+    margin-bottom: 60%;
 }
 
 .single_product img {
@@ -193,9 +194,16 @@ ul.main_nav_list li.active a{
     object-fit: cover;
 }
 
-.single_product .item {
-    margin-bottom: 60%;
+.single_product .quantity_remaining {
+    display: block;
 }
 
+.single_product .original_price {
+    text-decoration: line-through;
+}
+
+.single_product .description {
+    margin-bottom: 0;
+}
 
 
