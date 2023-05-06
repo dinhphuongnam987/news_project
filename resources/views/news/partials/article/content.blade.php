@@ -35,7 +35,7 @@
 
     @if ($lenghtContent > 0)
         <div class="post_text">
-            <p>{{ $content }}</p>
+            <p>{!! $content !!}</p>
         </div>
     @endif
 
