@@ -46,6 +46,9 @@ Here is my php source code for NEWS BLOG. With my code:
 
 * **Use the Laravel mix to compress the file and speedup**
 
+## Technologies:
+* **PHP, Laravel, Javascript, Jquery, Ajax, HTML, CSS**
+
 ## How to run my code:
 * **Step 1: Clone project**
 * **Step 2: Import database news_project.sql in database folder**
