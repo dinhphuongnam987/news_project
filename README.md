@@ -51,8 +51,8 @@ Here is my php source code for NEWS BLOG. With my code:
 
 ## How to run my code:
 * **Step 1: Clone project**
-* **Step 2: Import database news_project.sql in database folder**
-* **Step 3: Go to the project folder**
+* **Step 2: Go to the project folder**
+* **Step 3: Import database news_project.sql in database folder**
 * **Step 4: Copy .env.example file to .env on the root folder**
 * **Step 5: Run "composer install" on your cmd or terminal**
 * **Step 6: Run "php artisan key:generate"**
@@ -64,4 +64,4 @@ Here is my php source code for NEWS BLOG. With my code:
 * **PHP version >= 7.3**
 * **Node version > 14**
 * **Composer**
-* **Npm or yarn**
+* **Npm**
